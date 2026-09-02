@@ -4514,7 +4514,7 @@ html:not(.light) .demo-banner-copy {
 
 .mkt-audience-toggle {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0.65rem;
   margin-bottom: 1.15rem;
@@ -4524,11 +4524,14 @@ html:not(.light) .demo-banner-copy {
 }
 
 .mkt-audience-btn {
-  min-width: 8.75rem;
-  min-height: 2.75rem;
-  padding: 0.7rem 1.25rem;
-  letter-spacing: 0.08em;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 2.85rem;
+  padding: 0.7rem 1.1rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 0.92rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
 }
 
 .mkt-audience-btn.iid-btn-ghost {
@@ -5251,11 +5254,13 @@ html.light .mkt-logo-marquee-item {
 
   .mkt-audience-btn {
     flex: 1 1 0;
-    min-height: 2.75rem;
-    padding: 0.65rem 0.55rem;
-    font-size: 0.78rem;
+    min-height: 2.85rem;
+    padding: 0.7rem 0.75rem;
+    font-size: 0.88rem;
+    text-transform: none;
+    letter-spacing: 0.02em;
     text-align: center;
-    white-space: normal;
+    white-space: nowrap;
     line-height: 1.2;
   }
 
@@ -5322,5 +5327,22 @@ html.light .mkt-logo-marquee-item {
   .mkt-service-detail-copy .iid-btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 960px) {
+  .mkt-hero .mkt-hero-bg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--mkt-hero-photo);
+    background-size: cover;
+    background-position: center 18%;
+  }
+
+  .mkt-hero .mkt-hero-aside {
+    display: none;
   }
 }

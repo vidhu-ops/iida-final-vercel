@@ -69,10 +69,14 @@ export function LandingPage() {
     <MarketingShell>
       <GlowOrb className="mkt-glow-hero" />
 
-      <section className={`mkt-wrap mkt-hero mkt-hero--${audience}`} aria-labelledby="hero-heading">
+      <section
+        className={`mkt-wrap mkt-hero mkt-hero--${audience}`}
+        aria-labelledby="hero-heading"
+        style={{ ["--mkt-hero-photo" as string]: `url("${heroShot.src}")` }}
+      >
         <div className="mkt-hero-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={heroShot.src} alt="" />
+          <img key={`bg-${audience}`} src={heroShot.src} alt="" />
           <span className="mkt-hero-bg-fade" />
         </div>
         <div className="mkt-hero-grid">
@@ -105,6 +109,7 @@ export function LandingPage() {
           <div className="mkt-hero-aside">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
+              key={`aside-${audience}`}
               src={heroShot.src}
               alt={heroShot.alt}
               className="mkt-hero-photo mkt-product-shot"
