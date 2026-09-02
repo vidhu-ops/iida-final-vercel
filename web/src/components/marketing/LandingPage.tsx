@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ContactForm } from "./ContactForm";
 import { GlowOrb, HumanScene, MarketingPhoto } from "./illustrations";
-import { MARKETING_PHOTOS } from "./marketingImages";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
@@ -44,13 +43,13 @@ const PRODUCT_SHOTS = [
 
 const HERO_SHOTS = {
   founder: {
-    src: MARKETING_PHOTOS.workspace.src,
-    alt: "An individual founder working from a laptop",
+    src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1600&q=80",
+    alt: "An individual founder working in a modern office",
     caption: "Validate, plan, and execute from one founder workspace.",
   },
   company: {
-    src: MARKETING_PHOTOS["strategy-meeting"].src,
-    alt: "A company team in a strategy meeting",
+    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
+    alt: "A company team collaborating around laptops",
     caption: "Audit, research, and operate from one company workspace.",
   },
 } as const;
@@ -113,7 +112,7 @@ export function LandingPage() {
               key={`aside-${audience}`}
               src={heroShot.src}
               alt={heroShot.alt}
-              className="mkt-hero-photo mkt-product-shot"
+              className="mkt-hero-photo"
             />
             <p className="mkt-hero-aside-caption">{heroShot.caption}</p>
           </div>
@@ -149,71 +148,10 @@ export function LandingPage() {
         </div>
       </section>
 
-      <IndustryBanner />
-
-      <section id="about" className="mkt-wrap mkt-section" aria-labelledby="about-heading">
-        <div className="mkt-section-head">
-          <span className="mkt-label">About IIDATECH</span>
-          <h2 id="about-heading" className="mkt-h2">
-            {copy.whoForTitle}
-          </h2>
-          <p className="mkt-sub">{copy.whoForBody}</p>
-          <p className="mkt-sub" style={{ marginTop: "0.75rem" }}>
-            {copy.aboutBody}
-          </p>
-          <p className="mkt-sub" style={{ marginTop: "0.75rem" }}>
-            Search IIDATECH when you need market research for founders, business planning for a new business, business
-            consultation guidance, or a practical path to growth — research, plan, and execute in one workspace.
-          </p>
-        </div>
-
-        <div className="mkt-product-shots" aria-label="Product screenshots">
-          {PRODUCT_SHOTS.map((shot) => (
-            <figure key={shot.src} className="mkt-product-shot-card">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={shot.src} alt={shot.alt} loading="lazy" />
-              <figcaption>{shot.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <div className="mkt-about-readmore flex flex-wrap gap-2" style={{ marginTop: "1.25rem" }}>
-          <Link href="/about?audience=founder" className="iid-btn iid-btn-primary">
-            Read more for founders
-          </Link>
-          <Link href="/about?audience=company" className="iid-btn iid-btn-ghost">
-            Read more for B2B
-          </Link>
-          <Link href="/topics" className="iid-btn iid-btn-ghost">
-            Browse business topics
-          </Link>
-        </div>
-      </section>
-
-      <section id="how" className="mkt-wrap mkt-section">
-        <div className="mkt-section-head">
-          <span className="mkt-label">How it works</span>
-          <h2 className="mkt-h2">Research. Plan. Execute.</h2>
-          <p className="mkt-sub">Three moves inside one project vault — depth lives on the walkthrough page.</p>
-        </div>
-        <div className="mkt-process mkt-process-3">
-          {HOME_STEPS.map((s) => (
-            <div key={s.step} className="mkt-process-step">
-              <p className="mkt-step-big">{s.step}</p>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </div>
-          ))}
-        </div>
-        <Link href="/how-it-works" className="iid-btn iid-btn-ghost mkt-section-cta-inline">
-          See the full walkthrough →
-        </Link>
-      </section>
-
       <section id="services" className="mkt-wrap mkt-section">
         <div className="mkt-section-head">
           <span className="mkt-label">Services</span>
-          <h2 className="mkt-h2">Six services on the platform</h2>
+          <h2 className="mkt-h2">One platform. Six services.</h2>
           <p className="mkt-sub">
             Switch audience above to see founder vs company framing. Each service has a full page with steps and FAQ.
           </p>
@@ -268,6 +206,28 @@ export function LandingPage() {
             )}
           </div>
         </article>
+      </section>
+
+      <IndustryBanner />
+
+      <section id="how" className="mkt-wrap mkt-section">
+        <div className="mkt-section-head">
+          <span className="mkt-label">How it works</span>
+          <h2 className="mkt-h2">Research. Plan. Execute.</h2>
+          <p className="mkt-sub">Three moves inside one project vault — depth lives on the walkthrough page.</p>
+        </div>
+        <div className="mkt-process mkt-process-3">
+          {HOME_STEPS.map((s) => (
+            <div key={s.step} className="mkt-process-step">
+              <p className="mkt-step-big">{s.step}</p>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+        <Link href="/how-it-works" className="iid-btn iid-btn-ghost mkt-section-cta-inline">
+          See the full walkthrough →
+        </Link>
       </section>
 
       <section id="proof" className="mkt-wrap mkt-section">
@@ -376,6 +336,45 @@ export function LandingPage() {
           <span className="mkt-label">The solution</span>
           <h2 className="mkt-h2">{solution.title}</h2>
           <p className="mkt-sub">{solution.body}</p>
+        </div>
+      </section>
+
+      <section id="about" className="mkt-wrap mkt-section" aria-labelledby="about-heading">
+        <div className="mkt-section-head">
+          <span className="mkt-label">About IIDATECH</span>
+          <h2 id="about-heading" className="mkt-h2">
+            {copy.whoForTitle}
+          </h2>
+          <p className="mkt-sub">{copy.whoForBody}</p>
+          <p className="mkt-sub" style={{ marginTop: "0.75rem" }}>
+            {copy.aboutBody}
+          </p>
+          <p className="mkt-sub" style={{ marginTop: "0.75rem" }}>
+            Search IIDATECH when you need market research for founders, business planning for a new business, business
+            consultation guidance, or a practical path to growth — research, plan, and execute in one workspace.
+          </p>
+        </div>
+
+        <div className="mkt-product-shots" aria-label="Product screenshots">
+          {PRODUCT_SHOTS.map((shot) => (
+            <figure key={shot.src} className="mkt-product-shot-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={shot.src} alt={shot.alt} loading="lazy" />
+              <figcaption>{shot.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div className="mkt-about-readmore flex flex-wrap gap-2" style={{ marginTop: "1.25rem" }}>
+          <Link href="/about?audience=founder" className="iid-btn iid-btn-primary">
+            Read more for founders
+          </Link>
+          <Link href="/about?audience=company" className="iid-btn iid-btn-ghost">
+            Read more for B2B
+          </Link>
+          <Link href="/topics" className="iid-btn iid-btn-ghost">
+            Browse business topics
+          </Link>
         </div>
       </section>
 
