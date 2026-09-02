@@ -44,13 +44,13 @@ const PRODUCT_SHOTS = [
 
 const HERO_SHOTS = {
   founder: {
-    src: MARKETING_PHOTOS["founder-team"].src,
-    alt: "Individual founders collaborating in a workspace",
+    src: MARKETING_PHOTOS.workspace.src,
+    alt: "An individual founder working from a laptop",
     caption: "Validate, plan, and execute from one founder workspace.",
   },
   company: {
     src: MARKETING_PHOTOS["strategy-meeting"].src,
-    alt: "Company team in a strategy meeting",
+    alt: "A company team in a strategy meeting",
     caption: "Audit, research, and operate from one company workspace.",
   },
 } as const;
@@ -72,6 +72,7 @@ export function LandingPage() {
       <section
         className={`mkt-wrap mkt-hero mkt-hero--${audience}`}
         aria-labelledby="hero-heading"
+        data-hero-audience={audience}
         style={{ ["--mkt-hero-photo" as string]: `url("${heroShot.src}")` }}
       >
         <div className="mkt-hero-bg" aria-hidden="true">
@@ -81,10 +82,10 @@ export function LandingPage() {
         </div>
         <div className="mkt-hero-grid">
           <div className="mkt-hero-intro">
-            <div className="mkt-audience-toggle" role="group" aria-label="Choose how to read IIDATECH">
+            <div className="mkt-hero-audience" role="group" aria-label="Choose how to read IIDATECH">
               <button
                 type="button"
-                className={`iid-btn mkt-audience-btn${audience === "founder" ? " iid-btn-primary is-active" : " iid-btn-ghost"}`}
+                className={`mkt-hero-audience-btn${audience === "founder" ? " is-active" : ""}`}
                 aria-pressed={audience === "founder"}
                 onClick={() => setAudience("founder")}
               >
@@ -92,7 +93,7 @@ export function LandingPage() {
               </button>
               <button
                 type="button"
-                className={`iid-btn mkt-audience-btn${audience === "company" ? " iid-btn-primary is-active" : " iid-btn-ghost"}`}
+                className={`mkt-hero-audience-btn${audience === "company" ? " is-active" : ""}`}
                 aria-pressed={audience === "company"}
                 onClick={() => setAudience("company")}
               >
