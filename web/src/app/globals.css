@@ -50,10 +50,10 @@ html.dark {
   --iid-hero-fade:
     linear-gradient(
       180deg,
-      rgba(5, 7, 15, 0.12) 0%,
-      rgba(5, 7, 15, 0.28) 22%,
-      rgba(5, 7, 15, 0.62) 52%,
-      rgba(5, 7, 15, 0.9) 78%,
+      rgba(5, 7, 15, 0.28) 0%,
+      rgba(5, 7, 15, 0.46) 22%,
+      rgba(5, 7, 15, 0.72) 50%,
+      rgba(5, 7, 15, 0.92) 78%,
       rgba(5, 7, 15, 0.98) 100%
     );
   --font-display: var(--font-syne);
@@ -646,14 +646,14 @@ html.light body {
     pointer-events: none;
     background-image: var(--mkt-hero-photo);
     background-size: cover;
-    background-position: center 22%;
+    background-position: center 12%;
   }
 
   .mkt-hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 22%;
+    object-position: center 12%;
   }
 
   .mkt-hero-bg-fade {
