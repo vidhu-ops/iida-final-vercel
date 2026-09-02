@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ContactForm } from "./ContactForm";
 import { GlowOrb, HumanScene, MarketingPhoto } from "./illustrations";
+import { MARKETING_PHOTOS } from "./marketingImages";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
@@ -41,6 +42,19 @@ const PRODUCT_SHOTS = [
   },
 ] as const;
 
+const HERO_SHOTS = {
+  founder: {
+    src: MARKETING_PHOTOS["founder-team"].src,
+    alt: "Individual founders collaborating in a workspace",
+    caption: "Validate, plan, and execute from one founder workspace.",
+  },
+  company: {
+    src: MARKETING_PHOTOS["strategy-meeting"].src,
+    alt: "Company team in a strategy meeting",
+    caption: "Audit, research, and operate from one company workspace.",
+  },
+} as const;
+
 export function LandingPage() {
   const [audience, setAudience] = useState<Audience>("founder");
   const [service, setService] = useState<ToolId>("research");
@@ -49,30 +63,36 @@ export function LandingPage() {
   const solution = SOLUTION[audience];
   const activeService = useMemo(() => TOOLS.find((t) => t.id === service) || TOOLS[0], [service]);
   const serviceCopy = activeService[audience];
+  const heroShot = HERO_SHOTS[audience];
 
   return (
     <MarketingShell>
       <GlowOrb className="mkt-glow-hero" />
 
-      <section className="mkt-wrap mkt-hero" aria-labelledby="hero-heading">
+      <section className={`mkt-wrap mkt-hero mkt-hero--${audience}`} aria-labelledby="hero-heading">
+        <div className="mkt-hero-bg" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={heroShot.src} alt="" />
+          <span className="mkt-hero-bg-fade" />
+        </div>
         <div className="mkt-hero-grid">
           <div className="mkt-hero-intro">
             <div className="mkt-audience-toggle" role="group" aria-label="Choose how to read IIDATECH">
               <button
                 type="button"
-                className={`mkt-audience-btn${audience === "founder" ? " is-active" : ""}`}
+                className={`iid-btn mkt-audience-btn${audience === "founder" ? " iid-btn-primary is-active" : " iid-btn-ghost"}`}
                 aria-pressed={audience === "founder"}
                 onClick={() => setAudience("founder")}
               >
-                Read as founder
+                Individual
               </button>
               <button
                 type="button"
-                className={`mkt-audience-btn${audience === "company" ? " is-active" : ""}`}
+                className={`iid-btn mkt-audience-btn${audience === "company" ? " iid-btn-primary is-active" : " iid-btn-ghost"}`}
                 aria-pressed={audience === "company"}
                 onClick={() => setAudience("company")}
               >
-                Read as established company
+                Company
               </button>
             </div>
 
@@ -85,15 +105,11 @@ export function LandingPage() {
           <div className="mkt-hero-aside">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/marketing/frames/research.png"
-              alt="IIDATECH market research product screen"
+              src={heroShot.src}
+              alt={heroShot.alt}
               className="mkt-hero-photo mkt-product-shot"
             />
-            <p className="mkt-hero-aside-caption">
-              {audience === "founder"
-                ? "Validate, plan, and execute from one founder workspace."
-                : "Audit, research, and operate from one company workspace."}
-            </p>
+            <p className="mkt-hero-aside-caption">{heroShot.caption}</p>
           </div>
 
           <div className="mkt-hero-copy">

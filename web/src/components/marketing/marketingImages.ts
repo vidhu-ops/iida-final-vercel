@@ -17,7 +17,7 @@ export const MARKETING_PHOTOS: Record<
   { src: string; alt: string; caption?: string }
 > = {
   "founder-team": {
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
     alt: "Founders collaborating on a business plan",
     caption: "Founders planning together",
   },
@@ -27,7 +27,7 @@ export const MARKETING_PHOTOS: Record<
     caption: "Work from anywhere",
   },
   "strategy-meeting": {
-    src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
+    src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80",
     alt: "Team strategy discussion in a modern office",
     caption: "Strategy sessions",
   },
