@@ -119,13 +119,20 @@ export function LandingPage() {
           </div>
 
           <div className="mkt-hero-copy">
-            <div className="mkt-pipe" aria-hidden>
-              {copy.pipe.flatMap((step, i) =>
-                i === 0
-                  ? [<span key={step}>{step}</span>]
-                  : [<i key={`${step}-arrow`}>→</i>, <span key={step}>{step}</span>],
-              )}
-            </div>
+            <nav className="mkt-pipe" aria-label="IIDATECH topics">
+              {copy.pipe.map((step, i) => (
+                <span key={`${step.label}-${step.href}`} className="mkt-pipe-item">
+                  {i > 0 ? (
+                    <span className="mkt-pipe-arrow" aria-hidden>
+                      →
+                    </span>
+                  ) : null}
+                  <Link href={step.href} className="mkt-pipe-btn">
+                    {step.label}
+                  </Link>
+                </span>
+              ))}
+            </nav>
 
             <p className="mkt-lead">{copy.lead}</p>
 

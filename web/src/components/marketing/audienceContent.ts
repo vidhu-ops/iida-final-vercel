@@ -131,7 +131,12 @@ export const AUDIENCE = {
     h1Accent: ["FOUNDERS", "BUILDING"],
     lead:
       "IIDATECH is the all-in-one business ecosystem for startup founders: AI market research, business plan generation, Mentor guidance, Employee OS execution, and automation — so you can validate, plan, and ship without a full team.",
-    pipe: ["RESEARCH", "PLAN", "EXECUTE", "AUTOMATE"],
+    pipe: [
+      { label: "Research", href: "/services/research" },
+      { label: "Plan", href: "/services/plan" },
+      { label: "Execute", href: "/services/execute" },
+      { label: "Automate", href: "/services/automate" },
+    ],
     primaryCta: { href: "/login?mode=register", label: "Start free" },
     secondaryCta: { href: "/app/research?project=demo_readonly", label: "See demo", demo: true },
     whoForTitle: "Built for founders and early-stage startups",
@@ -150,7 +155,12 @@ export const AUDIENCE = {
     h1Accent: ["B2B", "COMPANIES"],
     lead:
       "IIDATECH helps established B2B companies run market research, growth planning, CRM-ready execution, and workflow automation on one platform — with GAUGE company audits and Employee OS capacity your teams can approve and scale.",
-    pipe: ["AUDIT", "RESEARCH", "PLAN", "OPERATE"],
+    pipe: [
+      { label: "Audit", href: "/services/gauge" },
+      { label: "Research", href: "/services/research" },
+      { label: "Plan", href: "/services/plan" },
+      { label: "Operate", href: "/services/execute" },
+    ],
     primaryCta: { href: "/login?intent=audit&mode=register", label: "Start free" },
     secondaryCta: { href: "/app/research?project=demo_readonly", label: "See demo", demo: true },
     whoForTitle: "Built for established B2B companies and MSME operators",
