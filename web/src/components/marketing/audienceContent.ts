@@ -14,8 +14,9 @@ export const TOOLS: Array<{
   id: ToolId;
   label: string;
   short: string;
-  founder: { title: string; body: string; inApp: string };
-  company: { title: string; body: string; inApp: string };
+  photoId: MarketingPhotoId;
+  founder: { title: string; body: string; inApp: string; output: string };
+  company: { title: string; body: string; inApp: string; output: string };
   videoId?: string;
   videoSrc?: string;
 }> = [
@@ -23,102 +24,114 @@ export const TOOLS: Array<{
     id: "research",
     label: "Market Research",
     short: "Research",
-
+    photoId: "market-research",
     videoSrc: "/marketing/videos/research.mp4",
     founder: {
       title: "Market research for founders",
       body: "Validate your idea with sourced competitor maps, TAM/SAM/SOM, buyer pain, and pricing evidence — before you spend on ads or inventory.",
       inApp: "Open Market Research → pick your project → click Generate report. You get a multi-section report with citations you can share with co-founders or investors.",
+      output: "A sourced market report with competitors, buyers, and sizing — ready to share.",
     },
     company: {
       title: "Market intelligence for growing companies",
       body: "Keep category, competitor, and pricing intelligence current for leadership, sales, and board updates — without hiring a full research bench.",
       inApp: "Create or open a company project → run Standard/Professional research → export the report for GTM and BD teams.",
+      output: "Fresh category intelligence your sales and leadership teams can use.",
     },
   },
   {
     id: "plan",
     label: "Business Planning",
     short: "Plan",
-
+    photoId: "presentation",
     videoSrc: "/marketing/videos/plan.mp4",
     founder: {
       title: "Bank- and investor-ready business plans",
       body: "Turn research into ICP, GTM, unit economics, and a structured plan you can submit for funding, loans, or co-founder alignment.",
       inApp: "Open Plan → click Build Agentic Business Plan. The plan stays linked to the same project as your research.",
+      output: "A structured business plan linked to your research — ready for banks or investors.",
     },
     company: {
       title: "Growth and operating plans for B2B teams",
       body: "Produce growth plans, expansion theses, and operating roadmaps that sales, ops, and finance can execute against.",
       inApp: "Use an existing-company project → generate a Growth/Investor plan → hand tasks to Employee OS.",
+      output: "A growth or operating plan your teams can execute against.",
     },
   },
   {
     id: "execute",
     label: "Employee OS",
     short: "Execute",
-
+    photoId: "collaboration",
     videoSrc: "/marketing/videos/execute.mp4",
     founder: {
       title: "AI employees that execute your plan",
       body: "Taylor (COO) plus specialists turn the plan into tasks — research follow-ups, leads, decks, and outreach — with approvals before anything external sends.",
       inApp: "Open Employee OS → Build checklist from plan → Run next / Run full office day → Approve tasks in Tasks & Approvals.",
+      output: "Approved tasks, drafts, and outreach — without hiring a full ops team.",
     },
     company: {
       title: "Virtual ops capacity for B2B companies",
       body: "Staff recurring research, CRM enrichment, outreach drafts, and department workflows without expanding headcount overnight.",
       inApp: "Configure department scope → hire agents → run office actions and approve outbound from the war room.",
+      output: "Recurring research, CRM, and outreach capacity under your approval.",
     },
   },
   {
     id: "automate",
     label: "Automation",
     short: "Automate",
-
+    photoId: "analytics",
     videoSrc: "/marketing/videos/automate.mp4",
     founder: {
       title: "Automations that close the loop",
       body: "Build workflows across CRM, inbox, and reporting so research and outreach do not die in spreadsheets.",
       inApp: "Open Automation → build a workflow → run steps with credits → connect tools under Integrations.",
+      output: "Workflows that keep CRM and follow-ups moving without spreadsheets.",
     },
     company: {
       title: "Department automation for B2B stacks",
       body: "Standardize lead routing, reporting packs, and follow-ups across HubSpot, Gmail, and your internal tools.",
       inApp: "Use Automation builders with team templates → run steps → monitor outcomes in the project workspace.",
+      output: "Standardized lead routing and reporting across your tools.",
     },
   },
   {
     id: "mentor",
     label: "Mentor",
     short: "Mentor",
-
+    photoId: "strategy-meeting",
     videoSrc: "/marketing/videos/mentor.mp4",
     founder: {
       title: "A mentor that knows your project",
       body: "Ask what to do next, get grounded advice from your research and plan, and hand work to Taylor when you are ready to execute.",
       inApp: "Open Mentor → chat about your idea or blockers → say run next or build checklist to trigger Employee OS.",
+      output: "Clear next steps grounded in your project — not generic advice.",
     },
     company: {
       title: "Operator guidance for company projects",
       body: "Leadership and managers get context-aware coaching tied to company memory, goals, and live workspace artifacts.",
       inApp: "Open Mentor with your company project selected → ask for priorities → hand execution to Taylor.",
+      output: "Operator coaching tied to your company's live workspace.",
     },
   },
   {
     id: "gauge",
     label: "GAUGE Company Audit",
     short: "Gauge",
-
+    photoId: "msme-business",
     videoSrc: "/marketing/videos/gauge.mp4",
     founder: {
       title: "Score your idea before you scale",
       body: "Run a GAUGE company audit on traction, market fit, operations, and readiness — so you know what to fix before fundraising or hiring.",
       inApp: "Open GAUGE / Company Audit → answer the questionnaire → review scored dimensions and recommended next actions.",
+      output: "A scored audit showing what to fix before you scale or raise.",
     },
     company: {
       title: "Company health audits for B2B operators",
       body: "Benchmark growth, ops, GTM, and financial readiness with a structured GAUGE audit your leadership team can act on.",
       inApp: "Start a free company audit → complete GAUGE inputs → share the scored report with leadership and Mentor.",
+      output: "A leadership-ready health report across growth, ops, and GTM.",
     },
   },
 ];
