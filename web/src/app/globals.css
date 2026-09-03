@@ -59,6 +59,15 @@ html.dark {
       rgba(5, 7, 15, 0.92) 78%,
       rgba(5, 7, 15, 0.98) 100%
     );
+  --iid-hero-fade-desktop:
+    linear-gradient(
+      105deg,
+      rgba(5, 7, 15, 0.94) 0%,
+      rgba(5, 7, 15, 0.84) 34%,
+      rgba(5, 7, 15, 0.58) 54%,
+      rgba(5, 7, 15, 0.28) 72%,
+      rgba(5, 7, 15, 0.1) 100%
+    );
   --font-display: var(--font-syne);
   --font-body: var(--font-jakarta);
   color-scheme: dark;
@@ -121,6 +130,15 @@ html.light {
       rgba(240, 244, 250, 0.72) 54%,
       rgba(240, 244, 250, 0.94) 80%,
       #f0f4fa 100%
+    );
+  --iid-hero-fade-desktop:
+    linear-gradient(
+      105deg,
+      rgba(244, 247, 252, 0.96) 0%,
+      rgba(244, 247, 252, 0.9) 34%,
+      rgba(244, 247, 252, 0.68) 54%,
+      rgba(244, 247, 252, 0.32) 72%,
+      rgba(244, 247, 252, 0.08) 100%
     );
   color-scheme: light;
 }
@@ -542,24 +560,47 @@ body {
   isolation: isolate;
   border: 1px solid var(--iid-line);
   border-radius: clamp(20px, 4vw, 32px);
-  background: var(--iid-hero-bg);
+  background: var(--iid-navy);
   box-shadow: var(--iid-hero-shadow);
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .mkt-hero-bg {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mkt-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.mkt-hero-bg-fade {
+  position: absolute;
+  inset: 0;
+  background: var(--iid-hero-fade-desktop);
+}
+
+.mkt-glow-hero {
   display: none;
 }
 
 .mkt-hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
-    "intro aside"
-    "copy aside";
-  gap: clamp(1.5rem, 4vw, 2.5rem) clamp(2.5rem, 6vw, 5rem);
-  padding: clamp(2.75rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4rem);
-  align-items: stretch;
+    "intro"
+    "copy";
+  gap: clamp(1.15rem, 2.5vw, 1.65rem);
+  padding: clamp(2.5rem, 6vw, 4.75rem) clamp(1.5rem, 5vw, 4rem);
+  min-height: clamp(28rem, 52vh, 36rem);
+  align-content: start;
+  align-items: start;
   position: relative;
   z-index: 1;
 }
@@ -573,6 +614,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  max-width: 42rem;
+  text-align: left;
 }
 
 .mkt-hero-intro .mkt-eyebrow {
@@ -583,17 +626,10 @@ body {
   margin-bottom: 0;
 }
 
-.mkt-hero-aside {
-  grid-area: aside;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  align-self: stretch;
-  justify-content: center;
-}
-
 .mkt-hero-copy {
   grid-area: copy;
+  max-width: 42rem;
+  text-align: left;
 }
 
 .mkt-hero-audience {
@@ -603,6 +639,27 @@ body {
   gap: 0.55rem;
   width: min(100%, 22.5rem);
   margin-bottom: 1.2rem;
+}
+
+.mkt-hero-audience-btn:not(.is-active) {
+  background: color-mix(in srgb, var(--iid-panel) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.mkt-hero-title-plain {
+  max-width: 24ch;
+  text-shadow: 0 2px 22px color-mix(in srgb, var(--iid-ink) 55%, transparent);
+}
+
+.mkt-hero .mkt-eyebrow,
+.mkt-hero .mkt-lead,
+.mkt-hero .mkt-hero-note {
+  text-shadow: 0 1px 14px color-mix(in srgb, var(--iid-ink) 40%, transparent);
+}
+
+.mkt-pipe-btn:not(:hover):not(:focus-visible) {
+  background: color-mix(in srgb, var(--iid-panel) 88%, transparent);
+  backdrop-filter: blur(12px);
 }
 
 .mkt-hero-audience-btn {
@@ -647,78 +704,27 @@ body {
 }
 
 @media (max-width: 960px) {
-  .mkt-glow-hero {
-    display: none;
-  }
-
-  .mkt-hero {
-    background: var(--iid-navy);
-  }
-
-  .mkt-hero-bg {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
   .mkt-hero-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     object-position: center 12%;
   }
 
   .mkt-hero-bg-fade {
-    position: absolute;
-    inset: 0;
     background: var(--iid-hero-fade);
   }
 
   .mkt-hero-grid {
-    position: relative;
-    z-index: 1;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "intro"
-      "copy";
     padding: 1.5rem 1.2rem 1.75rem;
     gap: 1.25rem;
     min-height: 32rem;
-  }
-
-  .mkt-hero .mkt-hero-aside {
-    display: none !important;
-  }
-
-  .mkt-hero-intro,
-  .mkt-hero-copy {
-    text-align: left;
+    align-content: start;
   }
 
   .mkt-hero-audience {
     width: 100%;
   }
 
-  .mkt-hero-audience-btn:not(.is-active) {
-    background: color-mix(in srgb, var(--iid-panel) 92%, transparent);
-    backdrop-filter: blur(12px);
-  }
-
   .mkt-hero-title-plain {
     max-width: 22ch;
-    text-shadow: 0 2px 22px color-mix(in srgb, var(--iid-ink) 55%, transparent);
-  }
-
-  .mkt-hero .mkt-eyebrow,
-  .mkt-hero .mkt-lead {
-    text-shadow: 0 1px 14px color-mix(in srgb, var(--iid-ink) 40%, transparent);
-  }
-
-  .mkt-pipe-btn:not(:hover):not(:focus-visible) {
-    background: color-mix(in srgb, var(--iid-panel) 92%, transparent);
-    backdrop-filter: blur(12px);
   }
 
   .mkt-hero-accent,
@@ -5127,9 +5133,8 @@ html.light .mkt-client-logo {
 }
 
 .mkt-hero-title-plain {
-  font-size: clamp(1.85rem, 4.5vw, 3rem);
-  line-height: 1.15;
-  max-width: 18ch;
+  font-size: clamp(1.85rem, 4.5vw, 3.15rem);
+  line-height: 1.12;
   display: block;
 }
 

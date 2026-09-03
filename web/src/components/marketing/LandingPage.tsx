@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ContactForm } from "./ContactForm";
-import { FrameIllustration, GlowOrb, HumanScene, MarketingPhoto, PlatformWheel } from "./illustrations";
+import { FrameIllustration, HumanScene, MarketingPhoto, PlatformWheel } from "./illustrations";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
@@ -69,7 +69,6 @@ export function LandingPage() {
         data-hero-audience={audience}
         style={{ ["--mkt-hero-photo" as string]: `url("${heroShot.src}")` }}
       >
-        <GlowOrb className="mkt-glow-hero" />
         <div className="mkt-hero-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={`bg-${audience}`} src={heroShot.src} alt="" />
@@ -100,17 +99,6 @@ export function LandingPage() {
             <h1 id="hero-heading" className="mkt-hero-title mkt-hero-title-plain">
               {copy.headline}
             </h1>
-          </div>
-
-          <div className="mkt-hero-aside">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              key={`aside-${audience}`}
-              src={heroShot.src}
-              alt={heroShot.alt}
-              className="mkt-hero-photo"
-            />
-            <p className="mkt-hero-aside-caption">{heroShot.caption}</p>
           </div>
 
           <div className="mkt-hero-copy">
