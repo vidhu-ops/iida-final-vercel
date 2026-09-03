@@ -7,7 +7,34 @@ export function GlowOrb({ className = "" }: Props) {
     <div className={`mkt-glow-orb ${className}`} aria-hidden="true">
       <span className="mkt-glow-orb-a" />
       <span className="mkt-glow-orb-b" />
+      <span className="mkt-glow-orb-c" />
     </div>
+  );
+}
+
+export function FrameIllustration({
+  src,
+  alt,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  return (
+    <figure className={`mkt-frame-illus ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} loading="lazy" />
+    </figure>
+  );
+}
+
+export function PlatformWheel({ className = "" }: { className?: string }) {
+  return (
+    <figure className={`mkt-platform-wheel ${className}`} aria-hidden="true">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/marketing/platform-wheel.png" alt="" loading="lazy" />
+    </figure>
   );
 }
 

@@ -19,6 +19,10 @@ import {
   type GameDef,
 } from "@/lib/iida-personality";
 import {
+  THEME_WELCOME_DONE_EVENT,
+  hasSeenThemeWelcome,
+} from "@/components/iida/IidaThemeWelcome";
+import {
   journeySummary,
   loadJourney,
   recordChat,
@@ -203,31 +207,55 @@ export function IidaAssistant({ email = "" }: Props) {
     return () => window.clearInterval(tick);
   }, [open, first, tour.title, tour.hook, pathname, bumpMood, user?.is_demo, authed]);
 
+  const runSoftOpen = useCallback(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(ORB_KEY) === "1") return;
+    const key = "iida_soft_open_session";
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, "1");
+    setOpen(true);
+    bumpMood("curious");
+    const explain =
+      "Quick orientation: you are on " + tour.title + ". " + tour.blurb + " " + tour.hook;
+    setChat((prev) => {
+      if (prev.some((x) => x.role === "iida" && x.text.includes("Quick orientation"))) return prev;
+      return [...prev, { role: "iida", text: explain }];
+    });
+    setActions([
+      { id: "what_is_this", label: "Explain more" },
+      { id: "what_next", label: "What next?" },
+      { id: "play_game", label: "Let's play" },
+    ]);
+  }, [bumpMood, tour.title, tour.blurb, tour.hook]);
+
   // Soft-open once per browser session so people notice IIDA is interactable.
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (sessionStorage.getItem(ORB_KEY) === "1") return;
     const key = "iida_soft_open_session";
     if (sessionStorage.getItem(key)) return;
-    const t = window.setTimeout(() => {
-      if (sessionStorage.getItem(ORB_KEY) === "1") return;
-      sessionStorage.setItem(key, "1");
-      setOpen(true);
-      bumpMood("curious");
-      const explain =
-        "Quick orientation: you are on " + tour.title + ". " + tour.blurb + " " + tour.hook;
-      setChat((prev) => {
-        if (prev.some((x) => x.role === "iida" && x.text.includes("Quick orientation"))) return prev;
-        return [...prev, { role: "iida", text: explain }];
-      });
-      setActions([
-        { id: "what_is_this", label: "Explain more" },
-        { id: "what_next", label: "What next?" },
-        { id: "play_game", label: "Let's play" },
-      ]);
-    }, 3500);
-    return () => window.clearTimeout(t);
-  }, [pathname, bumpMood, tour.title, tour.blurb, tour.hook]);
+
+    const scheduleSoftOpen = () => {
+      const t = window.setTimeout(() => {
+        if (sessionStorage.getItem(ORB_KEY) === "1") return;
+        runSoftOpen();
+      }, 2200);
+      return t;
+    };
+
+    let timer = 0;
+    if (hasSeenThemeWelcome()) {
+      timer = scheduleSoftOpen();
+    } else {
+      const onThemeDone = () => {
+        timer = scheduleSoftOpen();
+      };
+      window.addEventListener(THEME_WELCOME_DONE_EVENT, onThemeDone, { once: true });
+      return () => window.removeEventListener(THEME_WELCOME_DONE_EVENT, onThemeDone);
+    }
+
+    return () => window.clearTimeout(timer);
+  }, [pathname, runSoftOpen]);
 
   const pushIidaNote = useCallback(
     (text: string, intoChat: boolean, nextMood?: IidaMood) => {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ContactForm } from "./ContactForm";
-import { GlowOrb, HumanScene, MarketingPhoto } from "./illustrations";
+import { FrameIllustration, GlowOrb, HumanScene, MarketingPhoto, PlatformWheel } from "./illustrations";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
@@ -63,14 +63,13 @@ export function LandingPage() {
 
   return (
     <MarketingShell>
-      <GlowOrb className="mkt-glow-hero" />
-
       <section
         className={`mkt-wrap mkt-hero mkt-hero--${audience}`}
         aria-labelledby="hero-heading"
         data-hero-audience={audience}
         style={{ ["--mkt-hero-photo" as string]: `url("${heroShot.src}")` }}
       >
+        <GlowOrb className="mkt-glow-hero" />
         <div className="mkt-hero-bg" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img key={`bg-${audience}`} src={heroShot.src} alt="" />
@@ -146,13 +145,16 @@ export function LandingPage() {
       </section>
 
       <section id="services" className="mkt-wrap mkt-section">
-        <div className="mkt-section-head">
-          <span className="mkt-label">Services</span>
-          <h2 className="mkt-h2">One platform. Six services.</h2>
-          <p className="mkt-sub">
-            Each service gives you a clear output you can use right away — not just another chat thread. Switch
-            Individual or Company above to see what you get.
-          </p>
+        <div className="mkt-services-head">
+          <div className="mkt-section-head">
+            <span className="mkt-label">Services</span>
+            <h2 className="mkt-h2">One platform. Six services.</h2>
+            <p className="mkt-sub">
+              Each service gives you a clear output you can use right away — not just another chat thread. Switch
+              Individual or Company above to see what you get.
+            </p>
+          </div>
+          <PlatformWheel className="mkt-services-wheel" />
         </div>
         <div className="mkt-service-grid" role="list">
           {TOOLS.map((tool) => {
@@ -187,7 +189,8 @@ export function LandingPage() {
         </div>
         <div className="mkt-process mkt-process-3">
           {HOME_STEPS.map((s) => (
-            <div key={s.step} className="mkt-process-step">
+            <div key={s.step} className="mkt-process-step mkt-process-step-visual">
+              <FrameIllustration src={s.frame} alt={`${s.title} in IIDATECH`} className="mkt-process-step-frame" />
               <p className="mkt-step-big">{s.step}</p>
               <h3>{s.title}</h3>
               <p>{s.body}</p>
@@ -301,10 +304,17 @@ export function LandingPage() {
       </section>
 
       <section id="features" className="mkt-wrap mkt-section">
-        <div className="mkt-section-head">
-          <span className="mkt-label">The solution</span>
-          <h2 className="mkt-h2">{solution.title}</h2>
-          <p className="mkt-sub">{solution.body}</p>
+        <div className="mkt-features-split">
+          <div className="mkt-section-head">
+            <span className="mkt-label">The solution</span>
+            <h2 className="mkt-h2">{solution.title}</h2>
+            <p className="mkt-sub">{solution.body}</p>
+          </div>
+          <FrameIllustration
+            src="/marketing/frames/automate.png"
+            alt="IIDATECH automation workflows connecting CRM, inbox, and reporting"
+            className="mkt-features-visual"
+          />
         </div>
       </section>
 
