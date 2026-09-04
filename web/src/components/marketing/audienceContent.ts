@@ -192,19 +192,19 @@ export const HOME_STEPS = [
     step: "01",
     title: "Research",
     body: "Generate a sourced market report for your idea or category — competitors, buyers, sizing, and pricing evidence.",
-    frame: "/marketing/frames/research.png",
+    photoId: "market-research" as const,
   },
   {
     step: "02",
     title: "Plan",
     body: "Turn research into ICP, GTM, and a structured business or growth plan tied to the same project.",
-    frame: "/marketing/frames/plan.png",
+    photoId: "presentation" as const,
   },
   {
     step: "03",
     title: "Execute",
     body: "Run Employee OS tasks with human approvals, then automate follow-ups across CRM and inbox.",
-    frame: "/marketing/frames/execute.png",
+    photoId: "collaboration" as const,
   },
 ];
 

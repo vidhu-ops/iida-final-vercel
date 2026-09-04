@@ -209,7 +209,7 @@ export function LandingPage() {
         <div className="mkt-process mkt-process-3">
           {HOME_STEPS.map((s) => (
             <div key={s.step} className="mkt-process-step mkt-process-step-visual">
-              <FrameIllustration src={s.frame} alt={`${s.title} in IIDATECH`} className="mkt-process-step-frame" />
+              <MarketingPhoto id={s.photoId} className="mkt-process-step-photo" rounded="lg" />
               <p className="mkt-step-big">{s.step}</p>
               <h3>{s.title}</h3>
               <p>{s.body}</p>

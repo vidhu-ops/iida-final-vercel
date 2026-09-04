@@ -5467,7 +5467,11 @@ html.light .mkt-logo-marquee-item-integration {
 .mkt-logo-marquee-item-client {
   min-width: 9.5rem;
   min-height: 4.25rem;
-  background: rgba(8, 12, 22, 0.88);
+  padding: 0.5rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .mkt-logo-marquee-item-client img {
@@ -5476,7 +5480,14 @@ html.light .mkt-logo-marquee-item-integration {
 }
 
 html.light .mkt-logo-marquee-item {
-  background: #0b1220;
+  background: transparent;
+  border-color: transparent;
+}
+
+html.light .mkt-logo-marquee-item-client,
+html.light .mkt-logo-marquee-item-integration {
+  background: transparent;
+  border: none;
 }
 
 .mkt-clients-section .mkt-section-cta-inline,
@@ -5741,6 +5752,22 @@ html.light .mkt-logo-marquee-item {
 
 .mkt-process-step-frame {
   margin-bottom: 0.35rem;
+}
+
+.mkt-process-step-photo {
+  margin: 0 0 0.35rem;
+}
+
+.mkt-process-step-photo .mkt-photo-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mkt-process-step-photo .mkt-photo-caption {
+  padding: 0.55rem 0.75rem;
+  font-size: 0.78rem;
 }
 
 .mkt-features-split {
