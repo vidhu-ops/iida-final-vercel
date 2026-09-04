@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ContactForm } from "./ContactForm";
-import { FrameIllustration, HumanScene, MarketingPhoto, PlatformWheel } from "./illustrations";
+import { FrameIllustration, HumanScene, MarketingPhoto } from "./illustrations";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
-import { MARKETING_PHOTOS } from "./marketingImages";
 import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, SITE_WHATSAPP } from "@/lib/site";
@@ -21,6 +20,7 @@ import {
   SOLUTION,
   TOOLS,
   type Audience,
+  type ToolId,
 } from "./audienceContent";
 
 const PRODUCT_SHOTS = [
@@ -56,10 +56,13 @@ const HERO_SHOTS = {
 
 export function LandingPage() {
   const [audience, setAudience] = useState<Audience>("founder");
+  const [service, setService] = useState<ToolId>("research");
   const copy = AUDIENCE[audience];
   const problem = PROBLEM[audience];
   const solution = SOLUTION[audience];
   const heroShot = HERO_SHOTS[audience];
+  const activeService = useMemo(() => TOOLS.find((t) => t.id === service) ?? TOOLS[0], [service]);
+  const serviceCopy = activeService[audience];
 
   return (
     <MarketingShell>
@@ -133,38 +136,74 @@ export function LandingPage() {
       </section>
 
       <section id="services" className="mkt-wrap mkt-section">
-        <div className="mkt-services-head">
-          <div className="mkt-section-head">
-            <span className="mkt-label">Services</span>
-            <h2 className="mkt-h2">One platform. Six services.</h2>
-            <p className="mkt-sub">
-              Each service gives you a clear output you can use right away — not just another chat thread. Switch
-              Individual or Company above to see what you get.
+        <div className="mkt-section-head">
+          <span className="mkt-label">Services</span>
+          <h2 className="mkt-h2">One platform. Six services.</h2>
+          <p className="mkt-sub">
+            Switch Individual or Company above to see founder vs company framing. Each service has a full page with
+            steps and FAQ.
+          </p>
+        </div>
+        <div className="mkt-service-tabs" role="tablist" aria-label="IIDATECH services">
+          {TOOLS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              role="tab"
+              aria-selected={service === t.id}
+              className={`mkt-service-tab${service === t.id ? " is-active" : ""}`}
+              onClick={() => setService(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <article className="mkt-service-detail" aria-live="polite">
+          <div className="mkt-service-detail-copy">
+            <span className="mkt-tag">{activeService.short.toUpperCase()}</span>
+            <h3 className="mkt-feature-title">{serviceCopy.title}</h3>
+            <p className="mkt-feature-body">{serviceCopy.body}</p>
+            <p className="mkt-service-output">
+              <strong>You get:</strong> {serviceCopy.output}
             </p>
-          </div>
-          <PlatformWheel className="mkt-services-wheel" />
-        </div>
-        <div className="mkt-service-grid" role="list">
-          {TOOLS.map((tool) => {
-            const toolCopy = tool[audience];
-            const photo = MARKETING_PHOTOS[tool.photoId];
-            return (
-              <Link
-                key={tool.id}
-                href={`/services/${tool.id}`}
-                className="mkt-service-card"
-                role="listitem"
-                style={{ ["--mkt-service-photo" as string]: `url("${photo.src}")` }}
-              >
-                <span className="mkt-service-card-bg" aria-hidden="true" />
-                <span className="mkt-service-card-body">
-                  <span className="mkt-service-card-title">{tool.label}</span>
-                  <span className="mkt-service-card-output">{toolCopy.output}</span>
-                </span>
+            <p className="mkt-wheel-inapp">
+              <strong>In the app:</strong> {serviceCopy.inApp}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              <Link href={`/services/${activeService.id}`} className="iid-btn iid-btn-primary">
+                Read more
               </Link>
-            );
-          })}
-        </div>
+              <Link href="/login?mode=register" className="iid-btn iid-btn-ghost">
+                Start free
+              </Link>
+              <WorkspaceEntryLink className="iid-btn iid-btn-ghost">See demo</WorkspaceEntryLink>
+            </div>
+          </div>
+          <div className="mkt-service-detail-media">
+            <figure className="mkt-service-detail-image">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                key={`${activeService.id}-${audience}`}
+                src={`/marketing/frames/${activeService.id}.png`}
+                alt={`${activeService.label} in IIDATECH`}
+                loading="lazy"
+              />
+            </figure>
+            {activeService.videoSrc ? (
+              <div className="mkt-wheel-video">
+                <video
+                  key={activeService.videoSrc}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={`/marketing/frames/${activeService.id}.png`}
+                >
+                  <source src={activeService.videoSrc} type="video/mp4" />
+                </video>
+              </div>
+            ) : null}
+          </div>
+        </article>
       </section>
 
       <IndustryBanner />
