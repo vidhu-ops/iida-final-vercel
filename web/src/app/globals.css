@@ -5448,12 +5448,20 @@ html.light .mkt-client-logo {
 .mkt-logo-marquee-item-integration {
   min-width: 10.5rem;
   min-height: 5.25rem;
-  padding: 0.9rem 1.35rem;
+  padding: 0.5rem 0.85rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .mkt-logo-marquee-item-integration img {
   max-height: 3.5rem;
   max-width: 9.5rem;
+}
+
+html.light .mkt-logo-marquee-item-integration {
+  background: transparent;
 }
 
 .mkt-logo-marquee-item-client {
@@ -5642,14 +5650,21 @@ html.light .mkt-logo-marquee-item {
   }
 
   .mkt-logo-marquee-item-integration {
-    min-width: 8.75rem;
-    min-height: 4.35rem;
-    padding: 0.75rem 1.1rem;
+    min-width: 9rem;
+    min-height: 4.5rem;
+    padding: 0.35rem 0.55rem;
+    background: transparent;
+    border: none;
   }
 
   .mkt-logo-marquee-item-integration img {
-    max-height: 3rem;
-    max-width: 8rem;
+    max-height: 3.75rem;
+    max-width: 10.5rem;
+    min-height: 3rem;
+  }
+
+  .mkt-logo-marquee-track {
+    gap: 1.1rem;
   }
 
   .mkt-logo-marquee-item-client {
