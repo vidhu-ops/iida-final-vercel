@@ -65,22 +65,27 @@ export function MarketingShell({ children }: { children: React.ReactNode }) {
         {open ? (
           <div className="mkt-mobile-nav">
             <div className="mkt-wrap mkt-mobile-nav-inner">
-              {(onHome ? NAV : [...NAV, ...MORE_LINKS]).map((item) => (
-                <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
-              {onHome
-                ? MORE_LINKS.map((item) => (
-                    <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="mkt-mobile-more">
-                      {item.label}
-                    </Link>
-                  ))
-                : null}
-              <div className="mkt-mobile-nav-actions">
-                <ThemeToggle />
+              <div className="mkt-mobile-nav-actions mkt-mobile-nav-actions-top">
+                <div className="mkt-mobile-nav-utilities">
+                  <span className="mkt-mobile-nav-utilities-label">Appearance</span>
+                  <ThemeToggle />
+                </div>
                 <AuthNavLinks showDemo onNavigate={() => setOpen(false)} />
               </div>
+              <nav className="mkt-mobile-nav-links" aria-label="Mobile menu">
+                {(onHome ? NAV : [...NAV, ...MORE_LINKS]).map((item) => (
+                  <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
+                    {item.label}
+                  </Link>
+                ))}
+                {onHome
+                  ? MORE_LINKS.map((item) => (
+                      <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="mkt-mobile-more">
+                        {item.label}
+                      </Link>
+                    ))
+                  : null}
+              </nav>
             </div>
           </div>
         ) : null}
