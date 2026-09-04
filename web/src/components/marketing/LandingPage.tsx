@@ -7,6 +7,7 @@ import { FrameIllustration, HumanScene, MarketingPhoto } from "./illustrations";
 import { IconClock, IconGlobe, IconMail, IconPhone, IconPin, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
+import { MARKETING_PHOTOS } from "./marketingImages";
 import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, SITE_WHATSAPP } from "@/lib/site";
@@ -63,6 +64,7 @@ export function LandingPage() {
   const heroShot = HERO_SHOTS[audience];
   const activeService = useMemo(() => TOOLS.find((t) => t.id === service) ?? TOOLS[0], [service]);
   const serviceCopy = activeService[audience];
+  const servicePhoto = MARKETING_PHOTOS[activeService.photoId];
 
   return (
     <MarketingShell>
@@ -184,24 +186,14 @@ export function LandingPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 key={`${activeService.id}-${audience}`}
-                src={`/marketing/frames/${activeService.id}.png`}
-                alt={`${activeService.label} in IIDATECH`}
+                src={servicePhoto.src}
+                alt={servicePhoto.alt}
                 loading="lazy"
               />
+              {servicePhoto.caption ? (
+                <figcaption className="mkt-service-detail-caption">{servicePhoto.caption}</figcaption>
+              ) : null}
             </figure>
-            {activeService.videoSrc ? (
-              <div className="mkt-wheel-video">
-                <video
-                  key={activeService.videoSrc}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={`/marketing/frames/${activeService.id}.png`}
-                >
-                  <source src={activeService.videoSrc} type="video/mp4" />
-                </video>
-              </div>
-            ) : null}
           </div>
         </article>
       </section>

@@ -4928,7 +4928,19 @@ html:not(.light) .demo-banner-copy {
 .mkt-service-detail-image img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mkt-service-detail-caption {
+  padding: 0.7rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--iid-muted);
+  border-top: 1px solid var(--iid-line);
+  background: color-mix(in srgb, var(--iid-panel) 92%, transparent);
 }
 
 .mkt-wheel-video {
