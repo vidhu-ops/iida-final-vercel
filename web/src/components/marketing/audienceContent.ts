@@ -52,10 +52,10 @@ export const TOOLS: Array<{
     cardVideo: "/marketing/videos/tool-plan.mp4",
     videoSrc: "/marketing/videos/plan.mp4",
     founder: {
-      title: "Bank- and investor-ready business plans",
-      body: "Turn research into ICP, GTM, unit economics, and a structured plan you can submit for funding, loans, or co-founder alignment.",
+      title: "Structured business plans for funding conversations",
+      body: "Turn research into ICP, GTM, unit economics, and a structured plan you can use for funding, lending, and investor discussions.",
       inApp: "Open Plan → click Build Agentic Business Plan. The plan stays linked to the same project as your research.",
-      output: "A structured business plan linked to your research — ready for banks or investors.",
+      output: "A structured business plan linked to your research — ready for your next funding conversation.",
     },
     company: {
       title: "Growth and operating plans for B2B teams",
@@ -218,7 +218,8 @@ export const SECTION_VIDEOS = {
 export const HERO_WIX = {
   brand: "IIDA",
   founder: {
-    headline: "Turn your idea into a real business",
+    eyebrow: "For founders validating a business idea",
+    headline: "Before you build. Before you spend. Know what you're getting into.",
     pipe: [
       { label: "RESEARCH", href: "/services/research" },
       { label: "PLAN", href: "/services/plan" },
@@ -226,12 +227,14 @@ export const HERO_WIX = {
       { label: "AUTOMATE", href: "/services/automate" },
     ],
     subline:
-      "For founders and solo builders — get sourced market research, a bank-ready plan, and AI employees that help you ship the next step without hiring a full team.",
+      "IIDATECH researches your market, builds your business strategy, and turns it into an execution plan — with AI employees to help you act.",
+    trustLine: "30 free credits · No credit card · ~6 research runs or mix of tools",
     videoSrc: "/marketing/videos/hero-individual.mp4",
-    cta: { href: "/login?mode=register", label: "Start Now" },
+    cta: { href: "/login?mode=register", label: "Analyze my business" },
   },
   company: {
-    headline: "Grow what you already run",
+    eyebrow: "For MSMEs and B2B teams growing an existing business",
+    headline: "Find growth opportunities. Fix what's holding you back.",
     pipe: [
       { label: "AUDIT", href: "/services/gauge" },
       { label: "RESEARCH", href: "/services/research" },
@@ -239,9 +242,10 @@ export const HERO_WIX = {
       { label: "OPERATE", href: "/services/execute" },
     ],
     subline:
-      "For established B2B teams — score company health with GAUGE, keep market intelligence current, and add approved AI ops capacity across research, CRM, and workflows.",
+      "Run a GAUGE health audit, refresh market intelligence, and add approved AI ops capacity — without standing up a full strategy bench.",
+    trustLine: "30 free credits · No credit card · Start with a free company audit",
     videoSrc: "/marketing/videos/hero-company.mp4",
-    cta: { href: "/login?intent=audit&mode=register", label: "Start Now" },
+    cta: { href: "/login?intent=audit&mode=register", label: "Analyze my business" },
   },
 } as const;
 
@@ -250,22 +254,28 @@ export const HOME_STEPS = [
     step: "01",
     title: "Research",
     body:
-      "Research your business idea in few clicks with 18 topics and 25 sub-topics in a detailed report at a low cost — and understand how your market works.",
+      "Know your market, customers, competitors, pricing, and opportunity before you spend money — with sourced evidence you can review and share.",
     photoId: "market-research" as const,
+    frameSrc: "/marketing/frames/research.png",
+    frameAlt: "IIDATECH market research report with citations",
   },
   {
     step: "02",
     title: "Business Plan",
     body:
-      "A detailed business plan — submission ready, with 10 topics and sub-topics for your particular idea in a few clicks. Just like Shark Tank!",
+      "Structured plans for funding, lending, and investor discussions — built from your research, not a blank template.",
     photoId: "presentation" as const,
+    frameSrc: "/marketing/frames/plan.png",
+    frameAlt: "IIDATECH business plan output",
   },
   {
     step: "03",
     title: "Execution Plan",
     body:
-      "A detailed 30-page execution plan for your business idea with details like who to hire and options for execution.",
+      "A step-by-step roadmap with hiring, vendors, and actions your team — or Taylor — can run with your approval.",
     photoId: "collaboration" as const,
+    frameSrc: "/marketing/frames/execute.png",
+    frameAlt: "IIDATECH Employee OS task board",
   },
 ];
 
@@ -291,12 +301,172 @@ export const PROCESS_STEPS = [
 ] as const;
 
 export const WHY_US = [
-  { title: "Instant", body: "Creates reports within minutes." },
-  { title: "Fully secured", body: "Your idea and data do not get stored with us." },
-  { title: "Time saver", body: "Focus on growth — let us do the groundwork." },
-  { title: "Detailed", body: "18 topics and 24 sub-topics in every research run." },
-  { title: "Focused", body: "Comprehensive answers tailored to your business." },
-  { title: "Affordable", body: "Fast and low-cost so your business can do more." },
+  { title: "Instant", body: "Structured reports in minutes — not weeks of consulting back-and-forth." },
+  {
+    title: "Your data, your account",
+    body: "Project data stays in your workspace for the features you use. We do not use your business data to train public AI models.",
+  },
+  { title: "Time saver", body: "Focus on growth — let IIDATECH handle research structure and first drafts." },
+  { title: "Evidence-first", body: "See sources, findings, and what they mean — not just a wall of AI text." },
+  { title: "Focused", body: "Answers tied to your idea, market, and stage — not generic startup advice." },
+  { title: "Affordable", body: "Start free with credits. Scale when the outputs earn their keep." },
+] as const;
+
+export type VisitorGoalId = "validate" | "market" | "launch" | "grow" | "expand" | "execute";
+
+export const VISITOR_GOALS: Array<{
+  id: VisitorGoalId;
+  emoji: string;
+  title: string;
+  question: string;
+  href: string;
+  cta: string;
+}> = [
+  {
+    id: "validate",
+    emoji: "💡",
+    title: "Validate a business idea",
+    question: "Should I pursue this opportunity?",
+    href: "/login?mode=register",
+    cta: "Start with research",
+  },
+  {
+    id: "market",
+    emoji: "📊",
+    title: "Understand my market",
+    question: "Who competes, who buys, and what can I charge?",
+    href: "/services/research",
+    cta: "See market research",
+  },
+  {
+    id: "launch",
+    emoji: "🚀",
+    title: "Launch a business",
+    question: "I need a plan and first steps to go live.",
+    href: "/login?mode=register",
+    cta: "Build my plan",
+  },
+  {
+    id: "grow",
+    emoji: "📈",
+    title: "Grow an existing business",
+    question: "Where are my growth opportunities?",
+    href: "/login?intent=audit&mode=register",
+    cta: "Run a GAUGE audit",
+  },
+  {
+    id: "expand",
+    emoji: "🌎",
+    title: "Enter a new market",
+    question: "Is this market attractive and how do we enter?",
+    href: "/services/research",
+    cta: "Research a market",
+  },
+  {
+    id: "execute",
+    emoji: "🤖",
+    title: "Get execution help",
+    question: "I need tasks done — research, outreach, follow-ups.",
+    href: "/services/execute",
+    cta: "Meet Taylor",
+  },
+];
+
+export const DEMO_CASE_STUDY = {
+  title: "See what IIDATECH produces — before you sign up",
+  idea: "Premium healthy snack brand in Pune",
+  inputs: [
+    { label: "Idea", value: "Healthy snacks for working professionals" },
+    { label: "Location", value: "Pune, India" },
+    { label: "Customer", value: "Office workers, gyms, premium retail" },
+    { label: "Budget", value: "₹10 lakh to start" },
+  ],
+  outputs: [
+    { label: "Market opportunity", value: "Sized with segment focus" },
+    { label: "Competition", value: "Key players and positioning gaps" },
+    { label: "Customers", value: "Segments with highest willingness to pay" },
+    { label: "Pricing", value: "Range grounded in local comparables" },
+    { label: "GTM", value: "First 90-day launch moves" },
+    { label: "Execution", value: "Recommended actions + Taylor handoff" },
+  ],
+  demoHref: "/app/research?project=demo_readonly",
+} as const;
+
+export const PRODUCT_STORY = [
+  { step: "Input", body: '"I want to launch a premium skincare brand in India."' },
+  { step: "IIDATECH", body: "Market · Competition · Customers · Pricing · Risks · GTM · Financials" },
+  { step: "Your plan", body: "Structured business plan linked to the same project" },
+  { step: "Your roadmap", body: "Execution checklist with owners and approvals" },
+  { step: "AI employees", body: "Taylor can start distributor research, drafts, and follow-ups" },
+] as const;
+
+export const CHATGPT_COMPARE = {
+  chatgpt: [
+    "One-off answers in a chat thread",
+    "No persistent project context",
+    "You structure the output yourself",
+    "No execution or approvals workflow",
+  ],
+  iidatech: [
+    "Structured research → plan → execution workflow",
+    "Sourced reports with citations in a project vault",
+    "Business-specific sections — not generic essays",
+    "Taylor + integrations when you are ready to act",
+  ],
+} as const;
+
+export const TAYLOR_EXAMPLE = {
+  goal: "Find 100 potential distributors in Maharashtra for my healthy snack brand.",
+  steps: [
+    "Taylor researches the category and builds a qualified company list.",
+    "You review segments, pricing fit, and outreach angles.",
+    "Taylor drafts emails and CRM entries — nothing sends without your approval.",
+    "Approved outreach goes out; follow-ups land back in your workspace.",
+  ],
+} as const;
+
+export const EVIDENCE_EXAMPLE = {
+  finding: "Premium healthy-snack retail in Pune is growing fastest in office-adjacent micro-markets.",
+  source: "Industry reports + competitor pricing scan",
+  updated: "2026",
+  implication: "Lead with corporate pantry pilots and gym partnerships before broad retail listings.",
+} as const;
+
+export const PRODUCT_UI_SHOTS = [
+  { src: "/marketing/frames/research.png", alt: "Market research report", caption: "Research report with sections and citations" },
+  { src: "/marketing/frames/plan.png", alt: "Business plan workspace", caption: "Business plan tied to your project" },
+  { src: "/marketing/frames/execute.png", alt: "Employee OS office", caption: "Taylor and specialists in Employee OS" },
+  { src: "/marketing/frames/mentor.png", alt: "Mentor chat", caption: "Mentor grounded in your project" },
+  { src: "/marketing/frames/gauge.png", alt: "GAUGE company audit", caption: "GAUGE audit scores and gaps" },
+] as const;
+
+export const CASE_STUDIES = [
+  {
+    title: "Founder validating a D2C idea",
+    before: "Unsure whether the niche was big enough to quit a day job.",
+    after: "Sized the segment, mapped 8 competitors, and prioritized one beachhead channel.",
+    note: "Early operator example — names published when customers approve.",
+  },
+  {
+    title: "MSME entering a new city",
+    before: "Expansion felt like guesswork on pricing and partners.",
+    after: "Local pricing band, partner shortlist, and a 90-day rollout checklist.",
+    note: "Representative workflow — not a paid case study yet.",
+  },
+  {
+    title: "B2B team refreshing category intel",
+    before: "Sales used outdated competitor slides.",
+    after: "Shared research vault + quarterly refresh cadence in IIDATECH.",
+    note: "Illustrates company-mode usage.",
+  },
+] as const;
+
+/** Static credit guide — mirrors backend pricing_catalog defaults. */
+export const CREDIT_GUIDE = [
+  { action: "Quick market research", credits: 5 },
+  { action: "Business plan generation", credits: 5 },
+  { action: "Mentor conversation turn", credits: 1 },
+  { action: "Employee OS task", credits: 1 },
 ] as const;
 
 export const BY_THE_NUMBERS = [

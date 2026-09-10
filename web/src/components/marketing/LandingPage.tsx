@@ -4,6 +4,17 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ContactForm } from "./ContactForm";
+import {
+  CaseStudiesSection,
+  ChatGptCompareSection,
+  CreditsGuideSection,
+  DemoCaseStudySection,
+  EvidenceSection,
+  ProductScreensSection,
+  ProductStorySection,
+  TaylorExampleSection,
+  VisitorGoalsSection,
+} from "./FirstVisitorSections";
 import { WixBrandSections } from "./WixBrandSections";
 import { WixDetailCards } from "./WixDetailCards";
 import { HumanScene, MarketingPhoto } from "./illustrations";
@@ -12,6 +23,7 @@ import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
 import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
+import { usePricingCatalog } from "@/hooks/usePricingCatalog";
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, SITE_WHATSAPP } from "@/lib/site";
 import {
   AUDIENCE,
@@ -76,6 +88,8 @@ function SectionVideo({ src }: { src: string }) {
 export function LandingPage() {
   const [audience, setAudience] = useState<Audience>("founder");
   const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+  const { catalog } = usePricingCatalog();
+  const signupCredits = catalog?.signup_credits ?? 30;
   const copy = AUDIENCE[audience];
   const problem = PROBLEM[audience];
   const solution = SOLUTION[audience];
@@ -136,6 +150,7 @@ export function LandingPage() {
             </button>
           </div>
 
+          <p className="mkt-hero-wix-eyebrow">{hero.eyebrow}</p>
           <p className="mkt-hero-wix-brand" aria-hidden="true">
             {HERO_WIX.brand}
           </p>
@@ -155,8 +170,13 @@ export function LandingPage() {
             </Link>
           </div>
           <p className="mkt-hero-wix-subline">{hero.subline}</p>
+          <p className="mkt-hero-wix-trust">{hero.trustLine}</p>
         </div>
       </section>
+
+      <VisitorGoalsSection />
+      <DemoCaseStudySection />
+      <ProductStorySection />
 
       <section id="how" className="mkt-band mkt-band-full mkt-band-steps">
         <div className="mkt-wrap mkt-section mkt-section-steps mkt-band-content">
@@ -167,7 +187,10 @@ export function LandingPage() {
         <div className="mkt-step-cards">
           {HOME_STEPS.map((s) => (
             <article key={s.step} className="mkt-step-card">
-              <MarketingPhoto id={s.photoId} className="mkt-step-card-photo" rounded="lg" />
+              <figure className="mkt-step-card-frame">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.frameSrc} alt={s.frameAlt} loading="lazy" />
+              </figure>
               <h3 className="mkt-step-card-title">{s.title}</h3>
               <p className="mkt-step-card-body">{s.body}</p>
             </article>
@@ -186,11 +209,11 @@ export function LandingPage() {
         <div className="mkt-wrap mkt-section mkt-band-content">
           <div className="mkt-section-head mkt-section-head-center">
             <span className="mkt-label">Our services</span>
-            <h2 className="mkt-h2">Six tools. One platform.</h2>
+            <h2 className="mkt-h2">When you are ready — the tools behind each goal</h2>
             <p className="mkt-sub">
               {audience === "founder"
-                ? "Bold, focused tools for founders — research through execution in one workspace."
-                : "Bold, focused tools for B2B teams — audit, research, plan, and operate in one workspace."}
+                ? "You do not need all six on day one. Start with research or a plan — the rest unlock as you grow."
+                : "Start with a GAUGE audit or market refresh — then add ops capacity when leadership is ready."}
             </p>
           </div>
           <div className="mkt-tool-grid">
@@ -244,13 +267,18 @@ export function LandingPage() {
         </div>
       </section>
 
+      <ProductScreensSection />
+      <ChatGptCompareSection />
+      <TaylorExampleSection />
+      <EvidenceSection />
+
       <section id="about" className="mkt-band mkt-band-full mkt-band-about" aria-labelledby="about-heading">
         <div className="mkt-wrap mkt-section mkt-section-about-human mkt-band-content">
           <div className="mkt-about-human-grid">
             <div className="mkt-section-head">
               <span className="mkt-label">All about us</span>
               <h2 id="about-heading" className="mkt-h2">
-                Investor-ready plans in minutes — not months.
+                Structured plans in minutes — not months.
               </h2>
               <p className="mkt-sub">
                 We built IIDATECH for people who need professional business plans but do not have weeks to research
@@ -338,6 +366,9 @@ export function LandingPage() {
 
       <IndustryBanner />
 
+      <CaseStudiesSection />
+      <CreditsGuideSection signupCredits={signupCredits} />
+
       <section id="proof" className="mkt-wrap mkt-section">
         <div className="mkt-section-head mkt-section-head-center">
           <span className="mkt-label">By the numbers</span>
@@ -386,14 +417,24 @@ export function LandingPage() {
         <SectionVideo src={SECTION_VIDEOS.integrations} />
         <div className="mkt-wrap mkt-section mkt-band-content">
           <div className="mkt-section-head mkt-section-head-center">
-            <span className="mkt-label">Integrations</span>
+            <span className="mkt-label">Connect your stack</span>
             <h2 id="integrations-heading" className="mkt-h2">
-              All the tools you need in one platform
+              Integrations vs AI models
             </h2>
+            <p className="mkt-sub">
+              Optional OAuth apps connect your workspace to tools you already use. Model logos show which AI providers can power research and agents — not separate product logins.
+            </p>
           </div>
+          <p className="mkt-integrations-group-label">Workspace integrations (OAuth)</p>
           <LogoMarquee
-            items={INTEGRATION_LOGOS}
-            ariaLabel="IIDATECH product integrations"
+            items={INTEGRATION_LOGOS.filter((logo) => logo.group === "apps")}
+            ariaLabel="IIDATECH workspace integrations"
+            itemClassName="mkt-logo-marquee-item-integration"
+          />
+          <p className="mkt-integrations-group-label">AI models powering IIDATECH</p>
+          <LogoMarquee
+            items={INTEGRATION_LOGOS.filter((logo) => logo.group === "models")}
+            ariaLabel="AI models available in IIDATECH"
             itemClassName="mkt-logo-marquee-item-integration"
           />
         </div>
@@ -462,7 +503,7 @@ export function LandingPage() {
             <span className="mkt-label">Pricing</span>
             <h2 className="mkt-h2">Start free. Grow when you are ready.</h2>
             <p className="mkt-sub">
-              30 free credits to try research, plans, Mentor, and Employee OS. Paid and Enterprise options are a quick conversation away.
+              {signupCredits} free credits to try research, plans, Mentor, and Employee OS. Self-serve Starter from ₹4,999/mo — or talk to us for Growth and Enterprise.
             </p>
           </div>
           <div className="mkt-pricing-grid mkt-pricing-grid-3">
