@@ -674,7 +674,7 @@ function TeamContent() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-demo-tour="employee-office">
       <EmployeeOsChrome
         title="Employee OS"
         subtitle={`${floorMembers.length} on the floor · phase: ${phaseLabel}${bootstrap ? ` · ${String(bootstrap.topic || "")}` : ""}`}

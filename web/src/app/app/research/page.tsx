@@ -409,7 +409,7 @@ function ResearchContent() {
               ))}
 
               {markdown && (
-                <article className="iid-card iid-report-shell">
+                <article className="iid-card iid-report-shell" data-demo-tour="research-report">
                   <ReportMarkdown
                     markdown={markdown}
                     title="IIDATECH market research report"

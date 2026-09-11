@@ -206,7 +206,7 @@ function PlanContent() {
               )}
 
               {activeTab === "output" && (
-                <section className="iid-card iid-report-shell">
+                <section className="iid-card iid-report-shell" data-demo-tour="plan-output">
                   <h2 className="font-display text-xl font-bold">Readable plan</h2>
                   {markdown ? (
                     <div className="mt-4">

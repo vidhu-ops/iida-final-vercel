@@ -89,7 +89,7 @@ export default function DashboardPage() {
         )}
         {isDemo ? (
           <Link href="/app/research?project=demo_readonly" className="iid-btn iid-btn-primary">
-            View sample report
+            Start guided tour
           </Link>
         ) : (
           <>

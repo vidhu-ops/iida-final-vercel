@@ -3,6 +3,7 @@
 import { AppNav } from "@/components/AppNav";
 import { AppProductNav } from "@/components/AppProductNav";
 import { DemoBanner } from "@/components/DemoBanner";
+import { DemoCaseStudyWalkthrough } from "@/components/DemoCaseStudyWalkthrough";
 import { ensureSession } from "@/lib/api";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -129,6 +130,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="app-shell-main">
         {showProductNav ? <AppProductNav /> : null}
         <DemoBanner />
+        <DemoCaseStudyWalkthrough />
         {children}
       </div>
       <footer className="app-shell-footer">
