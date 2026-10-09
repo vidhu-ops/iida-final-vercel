@@ -6782,12 +6782,12 @@ html.light .mkt-band-about {
 }
 
 .mkt-tool-card-output {
-  margin: 0.1rem 0 0;
+  margin: 0.35rem 0 0;
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   line-height: 1.55;
-  color: var(--tool-accent);
-  font-weight: 600;
+  color: #64748b;
+  font-weight: 500;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -6837,7 +6837,8 @@ html.light .mkt-band-about {
 }
 
 .mkt-tool-card-link {
-  margin-top: 0.25rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
   font-weight: 700;
   font-size: 0.95rem;
   color: #0f172a;
