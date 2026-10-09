@@ -20,6 +20,7 @@ import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
 import { usePricingCatalog } from "@/hooks/usePricingCatalog";
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, SITE_WHATSAPP } from "@/lib/site";
+import { SectionVideo } from "./SectionVideo";
 import {
   AUDIENCE,
   BY_THE_NUMBERS,
@@ -34,50 +35,6 @@ import {
   WHY_US,
   type Audience
 } from "./audienceContent";
-
-function SectionVideo({ src }: { src: string }) {
-  const ref = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            if (!el.src) {
-              el.src = src;
-              el.load();
-            }
-            void el.play().catch(() => {
-              /* muted autoplay usually works once in view */
-            });
-          } else {
-            el.pause();
-          }
-        }
-      },
-      { rootMargin: "200px 0px", threshold: 0.05 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [src]);
-
-  return (
-    <div className="mkt-section-video" aria-hidden="true">
-      <video
-        ref={ref}
-        className="mkt-section-video-el"
-        muted
-        loop
-        playsInline
-        preload="none"
-        data-src={src}
-      />
-      <div className="mkt-section-video-scrim" />
-    </div>
-  );
-}
 
 export function LandingPage() {
   const [audience, setAudience] = useState<Audience>("founder");
@@ -445,8 +402,9 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="pricing" className="mkt-band mkt-band-full mkt-band-pricing">
-        <div className="mkt-wrap mkt-section mkt-band-content">
+      <section id="pricing" className="mkt-band mkt-band-full mkt-band-pricing mkt-band-has-video">
+        <SectionVideo src={SECTION_VIDEOS.services} />
+        <div className="mkt-wrap mkt-section mkt-band-content mkt-section-pricing-band">
           <div className="mkt-section-head mkt-section-head-center">
             <span className="mkt-label">Pricing</span>
             <h2 className="mkt-h2">Start free. Grow when you are ready.</h2>
@@ -454,7 +412,7 @@ export function LandingPage() {
               {signupCredits} free credits to try research, plans, Mentor, and Employee OS. Self-serve Starter from ₹4,999/mo — or talk to us for Growth and Enterprise.
             </p>
           </div>
-          <div className="mkt-pricing-grid mkt-pricing-grid-3">
+          <div className="mkt-pricing-grid mkt-pricing-grid-3 mkt-pricing-cards-band">
             {buildHomePricingCards(signupCredits).map((card) => (
               <PricingDropdownCard key={card.title} {...card} />
             ))}

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
 import { buildHomePricingTeaserCards } from "./homePricingCards";
 import { PricingDropdownCard } from "./PricingDropdownCard";
+import { SectionVideo } from "./SectionVideo";
 import {
   CASE_STUDIES,
   CHATGPT_COMPARE,
@@ -15,6 +16,7 @@ import {
   PRODUCT_STORY,
   PRODUCT_UI_SHOTS,
   TAYLOR_EXAMPLE,
+  SECTION_VIDEOS,
   VISITOR_GOALS,
 } from "./audienceContent";
 
@@ -295,23 +297,29 @@ export function EvidenceSection() {
 export function HomePricingTeaser({ signupCredits = 30 }: { signupCredits?: number }) {
   const cards = buildHomePricingTeaserCards(signupCredits);
   return (
-    <section id="pricing-preview" className="mkt-wrap mkt-section mkt-section-pricing-teaser">
-      <div className="mkt-section-head mkt-section-head-center">
-        <span className="mkt-label">Pricing</span>
-        <h2 className="mkt-h2">Start free. Upgrade when outputs earn their keep.</h2>
-        <p className="mkt-sub">
-          {signupCredits} free credits on signup — no credit card. Self-serve plans from ₹4,999/mo when you are ready to scale.
-        </p>
-      </div>
-      <div className="mkt-pricing-grid mkt-pricing-grid-3 mkt-pricing-teaser-dropdowns">
-        {cards.map((card) => (
-          <PricingDropdownCard key={card.title} {...card} />
-        ))}
-      </div>
-      <div className="mkt-section-cta-row mkt-pricing-teaser-actions">
-        <Link href="/pricing" className="iid-btn iid-btn-ghost">
-          Compare all plans →
-        </Link>
+    <section
+      id="pricing-preview"
+      className="mkt-band mkt-band-full mkt-band-pricing mkt-band-has-video mkt-band-pricing-teaser"
+    >
+      <SectionVideo src={SECTION_VIDEOS.services} />
+      <div className="mkt-wrap mkt-section mkt-band-content mkt-section-pricing-teaser">
+        <div className="mkt-section-head mkt-section-head-center">
+          <span className="mkt-label">Pricing</span>
+          <h2 className="mkt-h2">Start free. Upgrade when outputs earn their keep.</h2>
+          <p className="mkt-sub">
+            {signupCredits} free credits on signup — no credit card. Self-serve plans from ₹4,999/mo when you are ready to scale.
+          </p>
+        </div>
+        <div className="mkt-pricing-grid mkt-pricing-grid-3 mkt-pricing-cards-band">
+          {cards.map((card) => (
+            <PricingDropdownCard key={card.title} {...card} />
+          ))}
+        </div>
+        <div className="mkt-section-cta-row mkt-pricing-teaser-actions">
+          <Link href="/pricing" className="iid-btn iid-btn-ghost mkt-pricing-teaser-ghost-cta">
+            Compare all plans →
+          </Link>
+        </div>
       </div>
     </section>
   );
