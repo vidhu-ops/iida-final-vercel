@@ -5,7 +5,6 @@ import { CreditsGuideSection } from "./FirstVisitorSections";
 import { buildHomePricingCards } from "./homePricingCards";
 import { HumanScene, MarketingPhoto } from "./illustrations";
 import { IconClock, IconGlobe, IconSearch, IconUser } from "./icons";
-import { IndustryBanner } from "./IndustryBanner";
 import { PricingDropdownCard } from "./PricingDropdownCard";
 import { SectionVideo } from "./SectionVideo";
 import { WixDetailCards } from "./WixDetailCards";
@@ -41,8 +40,6 @@ export function AboutExtendedSections({ audience, signupCredits }: Props) {
           </div>
         </div>
       </section>
-
-      <IndustryBanner />
 
       <CreditsGuideSection signupCredits={signupCredits} />
 
