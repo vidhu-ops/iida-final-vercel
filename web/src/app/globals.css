@@ -2734,6 +2734,191 @@ body {
   text-align: center;
 }
 
+.mkt-price-card-dropdown .mkt-price-cta {
+  margin-top: auto;
+}
+
+.mkt-price-details {
+  border: 1px solid var(--iid-line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--iid-surface) 88%, transparent);
+  overflow: hidden;
+}
+
+.mkt-price-details-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--iid-text);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mkt-price-details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.mkt-price-details-chevron {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  color: var(--iid-muted);
+}
+
+.mkt-price-details[open] .mkt-price-details-chevron {
+  transform: rotate(180deg);
+}
+
+.mkt-price-list-details {
+  padding: 0 1rem 0.85rem;
+  border-top: 1px solid var(--iid-line);
+}
+
+.mkt-pricing-teaser-dropdowns {
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.mkt-section-case-slider {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.mkt-case-slider {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.mkt-case-card-slide {
+  min-height: 14rem;
+  padding: clamp(1.35rem, 4vw, 2rem) clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.mkt-case-slide-meta {
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--iid-muted);
+}
+
+.mkt-case-slide-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--iid-text);
+}
+
+.mkt-case-slide-before,
+.mkt-case-slide-after {
+  margin: 0 0 1rem;
+  font-size: clamp(1.05rem, 3.2vw, 1.28rem);
+  line-height: 1.55;
+  color: var(--iid-text);
+}
+
+.mkt-case-slide-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--iid-blue);
+}
+
+.mkt-case-slide-after .mkt-case-slide-label {
+  color: #0d9488;
+}
+
+.mkt-case-card-slide .mkt-case-note {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.mkt-case-slider-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--iid-line);
+  background: var(--iid-card-gradient);
+  color: var(--iid-text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.mkt-case-slider-nav:hover {
+  border-color: var(--iid-blue);
+  color: var(--iid-blue);
+}
+
+.mkt-case-slider-nav svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.mkt-case-slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.mkt-case-slider-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  background: color-mix(in srgb, var(--iid-muted) 45%, transparent);
+  cursor: pointer;
+}
+
+.mkt-case-slider-dot.is-active {
+  width: 1.6rem;
+  background: var(--iid-blue);
+}
+
+@media (max-width: 640px) {
+  .mkt-case-slider {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .mkt-case-slider-nav {
+    justify-self: center;
+  }
+
+  .mkt-case-slider-nav:first-of-type {
+    order: 2;
+  }
+
+  .mkt-case-card-slide {
+    order: 1;
+  }
+
+  .mkt-case-slider-nav:last-of-type {
+    order: 3;
+  }
+}
+
 .mkt-price-list {
   list-style: none;
   margin: 0;

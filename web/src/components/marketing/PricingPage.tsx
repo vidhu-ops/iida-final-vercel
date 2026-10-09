@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Check } from "lucide-react";
 import { CREDIT_GUIDE } from "./audienceContent";
+import { PricingDropdownCard } from "./PricingDropdownCard";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
 import { usePricingCatalog } from "@/hooks/usePricingCatalog";
 import { SITE_PHONE, SITE_PHONE_TEL, SITE_WHATSAPP } from "@/lib/site";
@@ -91,81 +91,55 @@ export function PricingPage() {
       <section className="mkt-wrap mkt-section">
         <div className="mkt-pricing-grid mkt-pricing-grid-wide">
           {featured ? (
-            <article className="mkt-price-card is-featured">
-              <span className="mkt-price-badge">Available now</span>
-              <h2 className="mkt-feature-title">{featured.display_name}</h2>
-              <p className="mkt-price">
-                <span className="mkt-price-currency">&#8377;</span>0<small>to begin</small>
-              </p>
-              <p className="mkt-feature-body">
-                {signupCredits} signup credits, demo workspace, and pay-per-use across research depth, plans, Mentor, and Employee OS.
-              </p>
-              <ul className="mkt-price-list">
-                {(featured.perks ?? []).slice(0, 4).map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/login?mode=register" className="iid-btn iid-btn-primary mkt-price-cta">
-                Start free
-              </Link>
-            </article>
+            <PricingDropdownCard
+              badge="Available now"
+              title={featured.display_name}
+              featured
+              price={
+                <>
+                  <span className="mkt-price-currency">&#8377;</span>0<small>to begin</small>
+                </>
+              }
+              summary={`${signupCredits} signup credits, demo workspace, and pay-per-use across research depth, plans, Mentor, and Employee OS.`}
+              perks={featured.perks ?? []}
+              checkHref="/login?mode=register"
+            />
           ) : null}
 
           {paidPlans.map((plan) => (
-            <article key={plan.id} className="mkt-price-card">
-              <span className="mkt-price-badge">{plan.billable ? "Self-serve" : "Coming soon"}</span>
-              <h2 className="mkt-feature-title">{plan.display_name}</h2>
-              <p className="mkt-price">
-                <span>{plan.price_label}</span>
-                {plan.period ? <small>{plan.period}</small> : null}
-              </p>
-              <p className="mkt-feature-body">
-                {plan.unlimited_usage ? "Unlimited in-app usage on core tools." : "Credit-based usage with higher limits."}
-              </p>
-              <ul className="mkt-price-list">
-                {(plan.perks ?? []).slice(0, 5).map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              {plan.checkout_href ? (
-                <Link href={plan.checkout_href} className="iid-btn iid-btn-primary mkt-price-cta">
-                  Choose {plan.display_name}
-                </Link>
-              ) : (
-                <a href={SITE_WHATSAPP} target="_blank" rel="noreferrer" className="iid-btn iid-btn-primary mkt-price-cta">
-                  WhatsApp to join waitlist
-                </a>
-              )}
-            </article>
+            <PricingDropdownCard
+              key={plan.id}
+              badge={plan.billable ? "Self-serve" : "Coming soon"}
+              title={plan.display_name}
+              price={
+                <>
+                  <span>{plan.price_label}</span>
+                  {plan.period ? <small>{plan.period}</small> : null}
+                </>
+              }
+              summary={
+                plan.unlimited_usage ? "Unlimited in-app usage on core tools." : "Credit-based usage with higher limits."
+              }
+              perks={plan.perks ?? []}
+              checkHref={plan.checkout_href ?? SITE_WHATSAPP}
+              checkExternal={!plan.checkout_href}
+            />
           ))}
 
           {enterprise ? (
-            <article className="mkt-price-card">
-              <span className="mkt-price-badge">Enterprise</span>
-              <h2 className="mkt-feature-title">{enterprise.display_name}</h2>
-              <p className="mkt-price">
-                <span className="mkt-price-coming">Custom</span>
-                <small>Scope, SLA, and integrations</small>
-              </p>
-              <p className="mkt-feature-body">Custom workflows, security review, dedicated delivery, and invoice billing.</p>
-              <ul className="mkt-price-list">
-                {(enterprise.perks ?? []).slice(0, 4).map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={SITE_PHONE_TEL} className="iid-btn iid-btn-ghost mkt-price-cta">
-                Call {SITE_PHONE}
-              </a>
-            </article>
+            <PricingDropdownCard
+              badge="Enterprise"
+              title={enterprise.display_name}
+              price={
+                <>
+                  <span className="mkt-price-coming">Custom</span>
+                  <small>Scope, SLA, and integrations</small>
+                </>
+              }
+              summary="Custom workflows, security review, dedicated delivery, and invoice billing."
+              perks={enterprise.perks ?? []}
+              checkHref={SITE_PHONE_TEL}
+            />
           ) : null}
         </div>
         <p className="mkt-pricing-note">

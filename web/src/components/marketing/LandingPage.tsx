@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Check } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ContactForm } from "./ContactForm";
 import {
   CaseStudiesSection,
   CreditsGuideSection,
   HomePricingTeaser,
-  ProductScreensSection,
 } from "./FirstVisitorSections";
+import { buildHomePricingCards } from "./homePricingCards";
+import { PricingDropdownCard } from "./PricingDropdownCard";
 import { WixBrandSections } from "./WixBrandSections";
 import { WixDetailCards } from "./WixDetailCards";
 import { HumanScene, MarketingPhoto } from "./illustrations";
@@ -220,8 +220,6 @@ export function LandingPage() {
       <HomePricingTeaser signupCredits={signupCredits} />
 
       <CaseStudiesSection />
-
-      <ProductScreensSection />
 
       <section id="proof" className="mkt-wrap mkt-section">
         <div className="mkt-section-head mkt-section-head-center">
@@ -457,63 +455,9 @@ export function LandingPage() {
             </p>
           </div>
           <div className="mkt-pricing-grid mkt-pricing-grid-3">
-            <article className="mkt-price-card is-featured">
-              <span className="mkt-price-badge">Available now</span>
-              <h3 className="mkt-feature-title">Free</h3>
-              <p className="mkt-price">
-                <span className="mkt-price-currency">&#8377;</span>0<small>to begin</small>
-              </p>
-              <p className="mkt-feature-body">Explore Research, Plan, Mentor, and Employee OS with 30 signup credits.</p>
-              <ul className="mkt-price-list">
-                {["Research, Plan, Mentor, Employee OS", "Demo workspace", "No credit card required"].map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/login?mode=register" className="iid-btn iid-btn-primary mkt-price-cta">
-                Start free
-              </Link>
-            </article>
-            <article className="mkt-price-card">
-              <span className="mkt-price-badge">Talk to us</span>
-              <h3 className="mkt-feature-title">Paid plans</h3>
-              <p className="mkt-price">
-                <span className="mkt-price-coming">Starting from — talk to us</span>
-              </p>
-              <p className="mkt-feature-body">Higher limits, integrations, automation builders, and support for growing teams.</p>
-              <ul className="mkt-price-list">
-                {["Core OS tools included", "OAuth integrations", "Higher usage limits"].map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={SITE_WHATSAPP} target="_blank" rel="noreferrer" className="iid-btn iid-btn-primary mkt-price-cta">
-                WhatsApp for quote
-              </a>
-            </article>
-            <article className="mkt-price-card">
-              <span className="mkt-price-badge">Enterprise</span>
-              <h3 className="mkt-feature-title">Enterprise</h3>
-              <p className="mkt-price">
-                <span className="mkt-price-coming">Custom</span>
-              </p>
-              <p className="mkt-feature-body">Custom workflows, security review, dedicated onboarding, and invoice billing.</p>
-              <ul className="mkt-price-list">
-                {["Custom scope & SLA", "Security review", "Dedicated onboarding"].map((perk) => (
-                  <li key={perk}>
-                    <Check className="h-4 w-4 shrink-0" aria-hidden />
-                    <span>{perk}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href={SITE_PHONE_TEL} className="iid-btn iid-btn-primary mkt-price-cta">
-                Call {SITE_PHONE}
-              </a>
-            </article>
+            {buildHomePricingCards(signupCredits).map((card) => (
+              <PricingDropdownCard key={card.title} {...card} />
+            ))}
           </div>
           <div className="mkt-pricing-home-actions">
             <Link href="/pricing" className="iid-btn iid-btn-primary mkt-price-cta">
