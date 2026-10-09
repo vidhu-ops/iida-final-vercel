@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
+import { buildHomePricingTeaserCards } from "./homePricingCards";
+import { PricingDropdownCard } from "./PricingDropdownCard";
 import {
   CASE_STUDIES,
   CHATGPT_COMPARE,
@@ -290,6 +293,7 @@ export function EvidenceSection() {
 }
 
 export function HomePricingTeaser({ signupCredits = 30 }: { signupCredits?: number }) {
+  const cards = buildHomePricingTeaserCards(signupCredits);
   return (
     <section id="pricing-preview" className="mkt-wrap mkt-section mkt-section-pricing-teaser">
       <div className="mkt-section-head mkt-section-head-center">
@@ -299,29 +303,14 @@ export function HomePricingTeaser({ signupCredits = 30 }: { signupCredits?: numb
           {signupCredits} free credits on signup — no credit card. Self-serve plans from ₹4,999/mo when you are ready to scale.
         </p>
       </div>
-      <div className="mkt-pricing-teaser-grid mkt-pricing-teaser-grid-3">
-        <article className="mkt-pricing-teaser-card is-highlight">
-          <h3 className="mkt-pricing-teaser-title">Free</h3>
-          <p className="mkt-pricing-teaser-price">₹0</p>
-          <p className="mkt-pricing-teaser-body">Demo workspace plus {signupCredits} credits for research, plans, Mentor, and Employee OS.</p>
-        </article>
-        <article className="mkt-pricing-teaser-card">
-          <h3 className="mkt-pricing-teaser-title">Paid plans</h3>
-          <p className="mkt-pricing-teaser-price">From ₹4,999/mo</p>
-          <p className="mkt-pricing-teaser-body">Higher limits, integrations, automation builders, and team support.</p>
-        </article>
-        <article className="mkt-pricing-teaser-card">
-          <h3 className="mkt-pricing-teaser-title">Enterprise</h3>
-          <p className="mkt-pricing-teaser-price">Custom</p>
-          <p className="mkt-pricing-teaser-body">Security review, dedicated onboarding, invoice billing, and custom scope.</p>
-        </article>
+      <div className="mkt-pricing-grid mkt-pricing-grid-3 mkt-pricing-teaser-dropdowns">
+        {cards.map((card) => (
+          <PricingDropdownCard key={card.title} {...card} />
+        ))}
       </div>
       <div className="mkt-section-cta-row mkt-pricing-teaser-actions">
-        <Link href="/login?mode=register" className="iid-btn iid-btn-primary">
-          Analyze my business
-        </Link>
         <Link href="/pricing" className="iid-btn iid-btn-ghost">
-          See full pricing →
+          Compare all plans →
         </Link>
       </div>
     </section>
@@ -352,21 +341,65 @@ export function CreditsGuideSection({ signupCredits = 30 }: { signupCredits?: nu
 }
 
 export function CaseStudiesSection() {
+  const [index, setIndex] = useState(0);
+  const total = CASE_STUDIES.length;
+  const study = CASE_STUDIES[index];
+
+  const go = (next: number) => {
+    setIndex((next + total) % total);
+  };
+
   return (
-    <section id="results" className="mkt-wrap mkt-section">
+    <section id="results" className="mkt-wrap mkt-section mkt-section-case-slider">
       <div className="mkt-section-head mkt-section-head-center">
         <span className="mkt-label">Early results</span>
         <h2 className="mkt-h2">Before → after (representative workflows)</h2>
         <p className="mkt-sub">We are publishing named case studies as customers approve them. These show the decision → action story today.</p>
       </div>
-      <div className="mkt-case-grid">
-        {CASE_STUDIES.map((study) => (
-          <article key={study.title} className="mkt-case-card">
-            <h3>{study.title}</h3>
-            <p><strong>Before:</strong> {study.before}</p>
-            <p><strong>After:</strong> {study.after}</p>
-            <p className="mkt-case-note">{study.note}</p>
-          </article>
+      <div className="mkt-case-slider">
+        <button
+          type="button"
+          className="mkt-case-slider-nav"
+          onClick={() => go(index - 1)}
+          aria-label="Previous example"
+        >
+          <ChevronLeft aria-hidden />
+        </button>
+        <article className="mkt-case-card mkt-case-card-slide" aria-live="polite">
+          <p className="mkt-case-slide-meta">
+            {index + 1} / {total}
+          </p>
+          <h3 className="mkt-case-slide-title">{study.title}</h3>
+          <p className="mkt-case-slide-before">
+            <span className="mkt-case-slide-label">Before</span>
+            {study.before}
+          </p>
+          <p className="mkt-case-slide-after">
+            <span className="mkt-case-slide-label">After</span>
+            {study.after}
+          </p>
+          <p className="mkt-case-note">{study.note}</p>
+        </article>
+        <button
+          type="button"
+          className="mkt-case-slider-nav"
+          onClick={() => go(index + 1)}
+          aria-label="Next example"
+        >
+          <ChevronRight aria-hidden />
+        </button>
+      </div>
+      <div className="mkt-case-slider-dots" role="tablist" aria-label="Workflow examples">
+        {CASE_STUDIES.map((item, i) => (
+          <button
+            key={item.title}
+            type="button"
+            role="tab"
+            aria-selected={i === index}
+            aria-label={`Show example ${i + 1}: ${item.title}`}
+            className={`mkt-case-slider-dot${i === index ? " is-active" : ""}`}
+            onClick={() => setIndex(i)}
+          />
         ))}
       </div>
     </section>

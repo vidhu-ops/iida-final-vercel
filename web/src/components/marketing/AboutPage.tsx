@@ -11,6 +11,7 @@ import {
   ChatGptCompareSection,
   DemoCaseStudySection,
   EvidenceSection,
+  ProductScreensSection,
   ProductStorySection,
   TaylorExampleSection,
 } from "./FirstVisitorSections";
@@ -83,6 +84,8 @@ export function AboutPage() {
       </section>
 
       <ProductStorySection />
+
+      <ProductScreensSection />
 
       <DemoCaseStudySection />
 
