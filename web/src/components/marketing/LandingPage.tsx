@@ -6,6 +6,7 @@ import { ContactForm } from "./ContactForm";
 import { CaseStudiesSection, HomePricingTeaser } from "./FirstVisitorSections";
 import { MarketingPhoto } from "./illustrations";
 import { IconMail, IconPhone, IconPin } from "./icons";
+import { IndustryBanner } from "./IndustryBanner";
 import { LogoMarquee } from "./LogoMarquee";
 import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
@@ -111,8 +112,9 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section id="services" className="mkt-band mkt-band-full mkt-band-services mkt-band-has-video">
-        <SectionVideo src={SECTION_VIDEOS.services} />
+      <IndustryBanner />
+
+      <section id="services" className="mkt-band mkt-band-full mkt-band-services">
         <div className="mkt-wrap mkt-section mkt-band-content">
           <div className="mkt-section-head mkt-section-head-center">
             <span className="mkt-label">Our services</span>
