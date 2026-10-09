@@ -6,138 +6,23 @@ import { buildHomePricingCards } from "./homePricingCards";
 import { HumanScene, MarketingPhoto } from "./illustrations";
 import { IconClock, IconGlobe, IconSearch, IconUser } from "./icons";
 import { IndustryBanner } from "./IndustryBanner";
-import { LogoMarquee } from "./LogoMarquee";
 import { PricingDropdownCard } from "./PricingDropdownCard";
 import { SectionVideo } from "./SectionVideo";
 import { WixDetailCards } from "./WixDetailCards";
-import {
-  AUDIENCE,
-  INTEGRATION_LOGOS,
-  PROCESS_STEPS,
-  PROBLEM,
-  SECTION_VIDEOS,
-  SOLUTION,
-  WHY_US,
-  type Audience,
-} from "./audienceContent";
+import { PROBLEM, SECTION_VIDEOS, SOLUTION, WHY_US, type Audience } from "./audienceContent";
 
 type Props = {
   audience: Audience;
   signupCredits: number;
 };
 
+/** Sections from “Want more details?” through pricing — lives on About only. */
 export function AboutExtendedSections({ audience, signupCredits }: Props) {
-  const copy = AUDIENCE[audience];
   const problem = PROBLEM[audience];
   const solution = SOLUTION[audience];
 
   return (
     <>
-      <section
-        id="integrations"
-        className="mkt-band mkt-band-full mkt-band-integrations mkt-band-has-video mkt-band-has-video-light"
-        aria-labelledby="integrations-heading"
-      >
-        <SectionVideo src={SECTION_VIDEOS.integrations} />
-        <div className="mkt-wrap mkt-section mkt-band-content">
-          <div className="mkt-section-head mkt-section-head-center">
-            <span className="mkt-label">Connect your stack</span>
-            <h2 id="integrations-heading" className="mkt-h2">
-              Integrations vs AI models
-            </h2>
-            <p className="mkt-sub">
-              Optional OAuth apps connect your workspace to tools you already use. Model logos show which AI providers can
-              power research and agents — not separate product logins.
-            </p>
-          </div>
-          <p className="mkt-integrations-group-label">Workspace integrations (OAuth)</p>
-          <LogoMarquee
-            items={INTEGRATION_LOGOS.filter((logo) => logo.group === "apps")}
-            ariaLabel="IIDATECH workspace integrations"
-            itemClassName="mkt-logo-marquee-item-integration"
-          />
-          <p className="mkt-integrations-group-label">AI models powering IIDATECH</p>
-          <LogoMarquee
-            items={INTEGRATION_LOGOS.filter((logo) => logo.group === "models")}
-            ariaLabel="AI models available in IIDATECH"
-            itemClassName="mkt-logo-marquee-item-integration"
-          />
-        </div>
-      </section>
-
-      <section id="about-story" className="mkt-band mkt-band-full mkt-band-about" aria-labelledby="about-story-heading">
-        <div className="mkt-wrap mkt-section mkt-section-about-human mkt-band-content">
-          <div className="mkt-about-human-grid">
-            <div className="mkt-section-head">
-              <span className="mkt-label">All about us</span>
-              <h2 id="about-story-heading" className="mkt-h2">
-                Structured plans in minutes — not months.
-              </h2>
-              <p className="mkt-sub">
-                We built IIDATECH for people who need professional business plans but do not have weeks to research
-                markets, create financial models, or write 30-page documents.
-              </p>
-              <p className="mkt-sub" style={{ marginTop: "0.75rem" }}>
-                {copy.aboutBody}
-              </p>
-              <ul className="mkt-about-list">
-                <li>Research your industry and competitors</li>
-                <li>Validate your idea with real market data</li>
-                <li>Create detailed financial projections</li>
-                <li>Build step-by-step execution roadmaps</li>
-                <li>Generate professional documents for individuals and teams</li>
-              </ul>
-              <div className="mkt-about-actions">
-                <Link href="/topics" className="iid-btn iid-btn-primary">
-                  Browse topics
-                </Link>
-                <Link href="/how-it-works" className="iid-btn iid-btn-ghost">
-                  See walkthrough
-                </Link>
-              </div>
-            </div>
-            <div className="mkt-about-people" aria-label="People building with IIDATECH">
-              <figure className="mkt-about-people-hero">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/marketing/people/about-1.jpg" alt="Founders collaborating on a business plan" loading="lazy" />
-              </figure>
-              <figure className="mkt-about-people-side">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/marketing/people/about-2.jpg" alt="Founder working on a laptop" loading="lazy" />
-              </figure>
-              <figure className="mkt-about-people-side">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/marketing/people/about-3.jpg" alt="Team collaborating around a laptop" loading="lazy" />
-              </figure>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="process" className="mkt-band mkt-band-full mkt-band-process mkt-band-has-video mkt-band-has-video-light">
-        <SectionVideo src={SECTION_VIDEOS.process} />
-        <div className="mkt-wrap mkt-section mkt-section-process mkt-band-content">
-          <div className="mkt-section-head mkt-section-head-center">
-            <span className="mkt-label">Process</span>
-            <h2 className="mkt-h2">It&apos;s as easy as 1, 2, 3</h2>
-          </div>
-          <div className="mkt-process mkt-process-3 mkt-process-human">
-            {PROCESS_STEPS.map((s) => (
-              <div key={s.step} className="mkt-process-step mkt-process-step-human">
-                <p className="mkt-step-big">{s.step}</p>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mkt-section-cta-row">
-            <Link href="/how-it-works" className="iid-btn iid-btn-primary">
-              See the full walkthrough →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       <WixDetailCards />
 
       <section id="why-us" className="mkt-band mkt-band-full mkt-band-why">
