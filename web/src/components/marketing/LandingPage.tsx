@@ -9,7 +9,6 @@ import {
   CreditsGuideSection,
   HomePricingTeaser,
   ProductScreensSection,
-  VisitorGoalsSection,
 } from "./FirstVisitorSections";
 import { WixBrandSections } from "./WixBrandSections";
 import { WixDetailCards } from "./WixDetailCards";
@@ -168,8 +167,6 @@ export function LandingPage() {
           <p className="mkt-hero-wix-trust">{hero.trustLine}</p>
         </div>
       </section>
-
-      <VisitorGoalsSection />
 
       <section id="services" className="mkt-band mkt-band-full mkt-band-services mkt-band-has-video">
         <SectionVideo src={SECTION_VIDEOS.services} />
