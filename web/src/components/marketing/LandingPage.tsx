@@ -26,7 +26,6 @@ import {
   BY_THE_NUMBERS,
   CLIENT_LOGOS,
   HERO_WIX,
-  HOME_STEPS,
   INTEGRATION_LOGOS,
   PROCESS_STEPS,
   PROBLEM,
@@ -206,27 +205,13 @@ export function LandingPage() {
                   </div>
                   <div className="mkt-tool-card-body">
                     <h3 className="mkt-tool-card-title">{toolCopy.title}</h3>
-                    <p className="mkt-tool-card-desc">{toolCopy.body}</p>
                     <p className="mkt-tool-card-output">{toolCopy.output}</p>
-                    <div className="mkt-tool-card-actions">
-                      <Link href={"/services/" + tool.id} className="iid-btn iid-btn-ghost mkt-tool-card-btn">
-                        Read more
-                      </Link>
-                      <WorkspaceEntryLink
-                        href={
-                          tool.id === "execute"
-                            ? "/app/team"
-                            : tool.id === "gauge"
-                              ? "/app/audit"
-                              : tool.id === "automate"
-                                ? "/app/automation"
-                                : "/app/" + tool.id
-                        }
-                        className="iid-btn iid-btn-primary mkt-tool-card-btn"
-                      >
-                        Check it out
-                      </WorkspaceEntryLink>
-                    </div>
+                    <Link
+                      href={"/services/" + tool.id}
+                      className="mkt-tool-card-link"
+                    >
+                      Read more
+                    </Link>
                   </div>
                 </article>
               );
@@ -236,32 +221,6 @@ export function LandingPage() {
       </section>
 
       <HomePricingTeaser signupCredits={signupCredits} />
-
-      <section id="how" className="mkt-band mkt-band-full mkt-band-steps">
-        <div className="mkt-wrap mkt-section mkt-section-steps mkt-band-content">
-        <div className="mkt-section-head mkt-section-head-center">
-          <span className="mkt-label">What you get</span>
-          <h2 className="mkt-h2">Research. Plan. Execute.</h2>
-        </div>
-        <div className="mkt-step-cards">
-          {HOME_STEPS.map((s) => (
-            <article key={s.step} className="mkt-step-card">
-              <figure className="mkt-step-card-frame">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.frameSrc} alt={s.frameAlt} loading="lazy" />
-              </figure>
-              <h3 className="mkt-step-card-title">{s.title}</h3>
-              <p className="mkt-step-card-body">{s.body}</p>
-            </article>
-          ))}
-        </div>
-        <div className="mkt-section-cta-row">
-          <Link href="/how-it-works" className="iid-btn iid-btn-primary mkt-steps-walkthrough">
-            See walkthrough
-          </Link>
-        </div>
-        </div>
-      </section>
 
       <CaseStudiesSection />
 
