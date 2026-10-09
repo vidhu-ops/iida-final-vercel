@@ -5,8 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MarketingShell } from "./MarketingShell";
 import { WorkspaceEntryLink } from "@/components/WorkspaceEntryLink";
+import { AboutExtendedSections } from "./AboutExtendedSections";
 import { ABOUT_BY_AUDIENCE, ABOUT_SHARED } from "./aboutContent";
 import type { Audience } from "./audienceContent";
+import { usePricingCatalog } from "@/hooks/usePricingCatalog";
 import {
   ChatGptCompareSection,
   DemoCaseStudySection,
@@ -22,6 +24,8 @@ export function AboutPage() {
   const initial = searchParams.get("audience") === "company" ? "company" : "founder";
   const [audience, setAudience] = useState<Audience>(initial);
   const copy = useMemo(() => ABOUT_BY_AUDIENCE[audience], [audience]);
+  const { catalog } = usePricingCatalog();
+  const signupCredits = catalog?.signup_credits ?? 30;
 
   useEffect(() => {
     const next = searchParams.get("audience") === "company" ? "company" : "founder";
@@ -193,6 +197,8 @@ export function AboutPage() {
       <ChatGptCompareSection />
       <TaylorExampleSection />
       <EvidenceSection />
+
+      <AboutExtendedSections audience={audience} signupCredits={signupCredits} />
 
       <section className="mkt-wrap mkt-section" id="faq">
         <div className="mkt-section-head">

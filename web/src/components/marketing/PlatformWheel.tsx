@@ -77,7 +77,7 @@ export function PlatformWheel({ audience }: { audience: Audience }) {
       </article>
 
       <div className="mkt-wheel-cta">
-        <Link href="/#pricing" className="iid-btn iid-btn-primary">
+        <Link href="/about#pricing" className="iid-btn iid-btn-primary">
           Check pricing
         </Link>
       </div>
