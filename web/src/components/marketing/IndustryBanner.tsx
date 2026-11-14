@@ -57,11 +57,11 @@ export function IndustryBanner({ signupCredits = 30 }: Props) {
                 : item.body;
             return (
               <li key={item.step} className="mkt-home-use-step-card">
-                <span className="mkt-home-use-step-num">{item.step}</span>
-                <div className="mkt-home-use-step-copy">
-                  <strong>{item.title}</strong>
-                  <p>{body}</p>
+                <div className="mkt-home-use-step-head">
+                  <span className="mkt-home-use-step-num">{item.step}</span>
+                  <h3 className="mkt-home-use-step-title">{item.title}</h3>
                 </div>
+                <p className="mkt-home-use-step-body">{body}</p>
               </li>
             );
           })}
