@@ -7307,6 +7307,17 @@ html.light .mkt-hero-wix-pipe {
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
 }
 
+/* html.light .mkt-h2 is darker for light pages; dark full-width bands keep white headings */
+html.light .mkt-band-full .mkt-h2,
+html.light .mkt-band-full .mkt-section-head h2,
+html.light .mkt-band-full .mkt-step-card-title,
+html.light .mkt-band-full .mkt-feature-title,
+html.light .mkt-band-full .mkt-why-card h3,
+html.light .mkt-band-full .mkt-process-step h3 {
+  color: #ffffff;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+}
+
 .mkt-band-full .mkt-sub,
 .mkt-band-full .mkt-step-card-body,
 .mkt-band-full .mkt-feature-body,
