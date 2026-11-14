@@ -442,6 +442,35 @@ body {
   padding-right: clamp(1.25rem, 4vw, 2.5rem);
 }
 
+/* Fixed marketing plates: local tokens override html.dark / html.light globals */
+.mkt-surface-light,
+.mkt-industry-steps-band,
+.mkt-industry-banner,
+.mkt-band-steps,
+.mkt-band-about {
+  --iid-text: #0a1020;
+  --iid-muted: #475569;
+  --iid-line: #e2e8f0;
+  --iid-panel: #ffffff;
+  --iid-elevated-soft: #f8fafc;
+  --iid-elevated-muted: #f1f5f9;
+  --iid-sky: #0846b7;
+  color: #0a1020;
+}
+
+.mkt-surface-dark,
+.mkt-band-services,
+.mkt-band-process,
+.mkt-band-why,
+.mkt-band-pricing,
+.mkt-band-integrations,
+.mkt-band-demo,
+.mkt-band-taylor {
+  --iid-text: #f8fafc;
+  --iid-muted: #cbd5e1;
+  color: #f8fafc;
+}
+
 .mkt-nav-shell {
   position: sticky;
   top: 0;
@@ -1045,7 +1074,7 @@ body {
   white-space: nowrap;
 }
 
-/* Industry banner + compact “how to use” steps (always a light band; fixes dark-theme text vars) */
+/* Industry banner + compact “how to use” steps (light surface — see .mkt-surface-light) */
 .mkt-industry-steps-band,
 .mkt-industry-banner {
   margin: 0 0 clamp(1.5rem, 3.5vw, 2.5rem);
@@ -1054,10 +1083,6 @@ body {
   border-bottom: 1px solid #e2e8f0;
   overflow: hidden;
   background: #ffffff;
-  color: #0a1020;
-  --iid-text: #0a1020;
-  --iid-muted: #475569;
-  --iid-line: #e2e8f0;
 }
 
 .mkt-industry-steps-band .mkt-industry-banner-label {
@@ -4328,10 +4353,8 @@ html.light .mkt-nav-shell {
   color: var(--iid-text);
 }
 
-html.light .mkt-section-head h2,
-html.light .mkt-h2,
-html.light .mkt-hero-title,
-html.light .mkt-section-title {
+/* Default light-theme headings on the page canvas — dark bands override below */
+html.light .mkt-page :is(.mkt-h2, .mkt-section-head h2, .mkt-hero-title, .mkt-section-title) {
   color: var(--iid-text);
 }
 
@@ -7307,15 +7330,73 @@ html.light .mkt-hero-wix-pipe {
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
 }
 
-/* html.light .mkt-h2 is darker for light pages; dark full-width bands keep white headings */
-html.light .mkt-band-full .mkt-h2,
-html.light .mkt-band-full .mkt-section-head h2,
-html.light .mkt-band-full .mkt-step-card-title,
-html.light .mkt-band-full .mkt-feature-title,
-html.light .mkt-band-full .mkt-why-card h3,
-html.light .mkt-band-full .mkt-process-step h3 {
+/* Light theme: white headings only on dark full-width bands (not steps/about/industry) */
+html.light
+  .mkt-band-full:is(
+    .mkt-band-services,
+    .mkt-band-process,
+    .mkt-band-why,
+    .mkt-band-pricing,
+    .mkt-band-integrations,
+    .mkt-band-demo,
+    .mkt-band-taylor
+  )
+  :is(
+    .mkt-h2,
+    .mkt-section-head h2,
+    .mkt-feature-title,
+    .mkt-why-card h3,
+    .mkt-process-step h3
+  ) {
   color: #ffffff;
   text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+}
+
+html.light
+  .mkt-band-full:is(
+    .mkt-band-services,
+    .mkt-band-process,
+    .mkt-band-why,
+    .mkt-band-pricing,
+    .mkt-band-integrations,
+    .mkt-band-demo,
+    .mkt-band-taylor
+  )
+  .mkt-sub,
+html.light
+  .mkt-band-full:is(
+    .mkt-band-services,
+    .mkt-band-process,
+    .mkt-band-why,
+    .mkt-band-pricing,
+    .mkt-band-integrations,
+    .mkt-band-demo,
+    .mkt-band-taylor
+  )
+  .mkt-feature-body,
+html.light
+  .mkt-band-full:is(
+    .mkt-band-services,
+    .mkt-band-process,
+    .mkt-band-why,
+    .mkt-band-pricing,
+    .mkt-band-integrations,
+    .mkt-band-demo,
+    .mkt-band-taylor
+  )
+  .mkt-why-card p,
+html.light
+  .mkt-band-full:is(
+    .mkt-band-services,
+    .mkt-band-process,
+    .mkt-band-why,
+    .mkt-band-pricing,
+    .mkt-band-integrations,
+    .mkt-band-demo,
+    .mkt-band-taylor
+  )
+  .mkt-process-step p {
+  color: rgba(248, 250, 252, 0.94);
 }
 
 .mkt-band-full .mkt-sub,
@@ -7343,13 +7424,24 @@ html.light .mkt-band-full .mkt-process-step h3 {
 html.light .mkt-band-process,
 html.light .mkt-band-why,
 html.light .mkt-band-pricing,
-html.light .mkt-band-services {
+html.light .mkt-band-services,
+html.light .mkt-band-integrations,
+html.light .mkt-band-demo,
+html.light .mkt-band-taylor {
   color: #f8fafc;
 }
 
 html.light .mkt-band-steps,
-html.light .mkt-band-about {
+html.light .mkt-band-about,
+html.light .mkt-industry-steps-band {
   color: #0f172a;
+}
+
+html.light .mkt-surface-light :is(.mkt-h2, .mkt-section-head h2),
+html.light .mkt-band-steps.mkt-band-full :is(.mkt-h2, .mkt-section-head h2),
+html.light .mkt-band-about.mkt-band-full :is(.mkt-h2, .mkt-section-head h2) {
+  color: #0f172a;
+  text-shadow: none;
 }
 
 /* White Research / Plan / Execute plate — overrides dark band text rules */
@@ -7701,11 +7793,6 @@ html.light .mkt-band-about {
 .mkt-section-case-in-about {
   padding-top: 0;
   margin-top: clamp(0.5rem, 2vw, 1rem);
-}
-
-.mkt-band-about.mkt-band-full .mkt-about-pillars li,
-.mkt-band-about.mkt-band-full .mkt-about-results li {
-  color: var(--iid-text);
 }
 
 .mkt-about-people {
